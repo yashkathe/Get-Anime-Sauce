@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo&display=swap');
+
+.divHeader{
+    /* width: calc(100%_- 20px); */
+    margin-top: 5vh;
+    height: 6.5vh;
+    z-index: 10;
+    font-family: 'Heebo', sans-serif;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    box-shadow: 5px 1px 10px 3px rgba(0,0,0,0.5);
+    border-radius: 40px;
+    background-color: rgba(13,151,172,0.9);
+}
+
+.divOne{
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px 3rem;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.divTwo{
+    display: inline-block;
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0px 3rem;
+    font-size: 30px;
+}
