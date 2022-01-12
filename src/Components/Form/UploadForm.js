@@ -61,13 +61,15 @@ const UploadForm = () => {
             </div>
             <div>
                 <form>
-                    <input className={classes.urlInput} />
-                    <button type='submit' className={classes.btn}>
-                        sub
-                    </button>
+                    <input
+                        className={`${classes.urlInput} ${
+                            !isUrl && classes.cancel
+                        }`}
+                        placeholder='Image URL'
+                    />
                 </form>
                 <form>
-                    <input type='file' accept='image/*' />
+                    <input type='file' />
                 </form>
             </div>
         </React.Fragment>
