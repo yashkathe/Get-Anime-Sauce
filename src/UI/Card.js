@@ -9,3 +9,5 @@ const Card = props => {
         // to act as a wrapper use props.children which gives us the content between opening and closing of the card component 
     )
 }
+
+export default Card
