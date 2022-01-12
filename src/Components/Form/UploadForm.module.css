@@ -12,47 +12,64 @@
     border-radius: 50%;
 }
 
+.fileUpload {
+    display: none;
+}
+
 .upIcons {
     height: 3.5rem;
 }
 
 .optButton {
-    padding:1rem ;
+    padding: 1rem;
     border-radius: 50%;
 }
 
-.optButtonActive{
-    padding:1rem ;
+.optButtonActive {
+    padding: 1rem;
     border-radius: 50%;
-    background-color: rgba(255, 245, 238,0.8);
+    background-color: rgba(255, 245, 238, 0.8);
 }
 
 .btn {
     color: black;
 }
 
-.urlInput{
-    height: 2rem;
+.urlInput {
+    height: 2.3rem;
     margin: 2rem;
     border-radius: 45px;
     width: 80%;
-    transition: 800ms;
     opacity: 1;
+    text-align: center;
+    transition: 1000ms;
 }
 
-.urlInput.cancel{
-    height: 2rem;
-    margin: 2rem;
-    border-radius: 45px;
+.urlInput.cancel {
     width: 0;
     opacity: 0;
 }
 
-
-
-div > form {
+.urlDiv > input {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.submit {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit > button {
+    background-color: rgba(96, 170, 182, 0.9);
+    box-sizing: border-box;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 1rem;
+    border-radius: 44px;
 }
