@@ -36,10 +36,10 @@
 }
 
 .urlInput {
-    height: 2.3rem;
+    height: 2.5rem;
     margin: 2rem;
     border-radius: 45px;
-    width: 80%;
+    width: 90%;
     opacity: 1;
     text-align: center;
     transition: 1000ms;

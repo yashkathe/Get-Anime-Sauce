@@ -10,15 +10,29 @@ const UploadForm = () => {
     //refs
 
     const inputFile = useRef(null);
+
+    const urlRef = useRef();
+
     // variants and hover
 
     const hover = {
         rotate: [0, -18, 18, -18, 18, 0],
     };
 
+    const urlFocus = {
+        scale: 1.2,
+        borderBottom: "3px solid black",
+        boxShadow: "0 4px 6px rgba(0,0,0,0.5)",
+        transition: {
+            type: "spring",
+            duration: 0.1,
+        },
+    };
+
     // state handling
 
     const [isUrl, setIsUrl] = useState(true);
+    const [error, setError] = useState(null)
 
     const photoHandler = () => {
         setIsUrl(false);
@@ -29,6 +43,29 @@ const UploadForm = () => {
     const urlHandler = () => {
         setIsUrl(true);
     };
+
+    //http request
+
+    async function fetchUrlHandler() {
+        const urlInput = urlRef.current.value;
+
+        try{
+            const response = await fetch(
+                `https://api.trace.moe/search?url=${encodeURIComponent(
+                    `${urlInput}`
+                )}`
+            );
+    
+            const data = await response.json();
+    
+            console.log(data);
+        }catch(error){
+            setError(error.message)
+            console.log(error)
+        }
+
+
+    }
 
     return (
         <React.Fragment>
@@ -83,20 +120,14 @@ const UploadForm = () => {
                         !isUrl && classes.cancel
                     }`}
                     placeholder='Image URL'
-                    whileFocus={{
-                        scale: 1.3,
-                        borderBottom: "3px solid black",
-                        boxShadow: "0 4px 8px rgba(0,0,0,0.5)",
-                        transition: {
-                            type:'tween',
-                            mass:0.8,
-                            duration:0.1
-                        },
-                    }}
+                    whileFocus={urlFocus}
+                    ref={urlRef}
                 />
             </div>
             <div className={classes.submit}>
-                <button type='submit'>Submit</button>
+                <button type='submit' onClick={fetchUrlHandler}>
+                    Submit
+                </button>
             </div>
         </React.Fragment>
     );
