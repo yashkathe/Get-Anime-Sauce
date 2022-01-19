@@ -4,7 +4,11 @@ import folderIcon from "../../assets/folder.png";
 import urlIcon from "../../assets/url.png";
 import { motion } from "framer-motion";
 
+import ReceivedResult from "../Result/ReceivedResult";
+import Spinner from "../../UI/Spinner";
+
 import classes from "./UploadForm.module.css";
+import Errormsg from "../../UI/Errormsg";
 
 const UploadForm = () => {
     //refs
@@ -31,8 +35,13 @@ const UploadForm = () => {
 
     // state handling
 
+    //state for assigning css classes
     const [isUrl, setIsUrl] = useState(true);
-    const [error, setError] = useState(null)
+
+    //state for fetching data
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [receivedData, setReceivedData] = useState([]);
 
     const photoHandler = () => {
         setIsUrl(false);
@@ -44,27 +53,36 @@ const UploadForm = () => {
         setIsUrl(true);
     };
 
+    const popupHandler = () => {
+        setError(null);
+        console.log("close");
+    };
+
     //http request
 
     async function fetchUrlHandler() {
-        const urlInput = urlRef.current.value;
-
-        try{
+        setError(null);
+        setIsLoading(true);
+        try {
             const response = await fetch(
                 `https://api.trace.moe/search?url=${encodeURIComponent(
-                    `${urlInput}`
+                    `${urlRef.current.value}`
                 )}`
             );
-    
+
+            if (!response.ok) {
+                throw new Error("Request failed or Incorrect image url");
+            }
+
             const data = await response.json();
-    
-            console.log(data);
-        }catch(error){
-            setError(error.message)
-            console.log(error)
+            setIsLoading(false);
+            setReceivedData(data);
+        } catch (err) {
+            setError(err.message);
+            setIsLoading(false);
         }
 
-
+        urlRef.current.value = "";
     }
 
     return (
@@ -129,6 +147,16 @@ const UploadForm = () => {
                     Submit
                 </button>
             </div>
+            {/* spinner  */}
+
+            {isLoading && <Spinner />}
+            {error && (
+                <Errormsg errorMsg={error} popupCloseHandler={popupHandler} />
+            )}
+
+            {/* result */}
+
+            <ReceivedResult items={receivedData} />
         </React.Fragment>
     );
 };

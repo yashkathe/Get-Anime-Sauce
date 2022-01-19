@@ -1,0 +1,55 @@
+.backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.backdrop.disable{
+    display: none;
+}
+
+.error{
+    position: fixed;
+    top: 50vh;
+    left: 51%;
+    height:13rem ;
+    width: 22rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(13,151,172,1);
+    border-radius: 30px;
+    box-sizing: border-box;
+    transform: translate3d(-50%, -50%, 0);  
+}
+
+.error h4{
+    margin: 0;
+    font-size: 28px;
+}
+
+.error .errorMsg{
+    padding: 2rem 0;
+    font-size: 20px;
+}
+
+.error button{
+    /* background-color: rgba(96, 170, 182, 0.9); */
+    background-color: #2b2b2b;
+    color: #EDEADE;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 0.8rem;
+    border-radius: 18px;
+}
+
+.error button:hover,
+.error button:active{
+    background-color:rgba(96, 170, 182, 0.9) ;
+    color: black;
+}
