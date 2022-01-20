@@ -41,6 +41,7 @@ const UploadForm = () => {
     //state for fetching data
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [dataFetch, setDataFetched] = useState(false);
     const [receivedData, setReceivedData] = useState([]);
 
     const photoHandler = () => {
@@ -58,14 +59,19 @@ const UploadForm = () => {
         console.log("close");
     };
 
+    const popupHandlerTwo = () => {
+        setDataFetched(false)
+    }
+
     //http request
 
     async function fetchUrlHandler() {
         setError(null);
         setIsLoading(true);
+        setDataFetched(false);
         try {
             const response = await fetch(
-                `https://api.trace.moe/search?url=${encodeURIComponent(
+                `https://api.trace.moe/search?anilistInfo&url=${encodeURIComponent(
                     `${urlRef.current.value}`
                 )}`
             );
@@ -75,11 +81,14 @@ const UploadForm = () => {
             }
 
             const data = await response.json();
+            setError(false);
             setIsLoading(false);
+            setDataFetched(true);
             setReceivedData(data);
         } catch (err) {
             setError(err.message);
             setIsLoading(false);
+            setDataFetched(false);
         }
 
         urlRef.current.value = "";
@@ -147,16 +156,21 @@ const UploadForm = () => {
                     Submit
                 </button>
             </div>
-            {/* spinner  */}
 
-            {isLoading && <Spinner />}
+            {/* spinner  and error msg*/}
+
+            {isLoading === true && <Spinner />}
             {error && (
                 <Errormsg errorMsg={error} popupCloseHandler={popupHandler} />
             )}
 
             {/* result */}
-
-            <ReceivedResult items={receivedData} />
+            {isLoading === false && dataFetch === true && !error && (
+                <ReceivedResult
+                    items={receivedData}
+                    popupCloseHandler={popupHandlerTwo}
+                />
+            )}
         </React.Fragment>
     );
 };

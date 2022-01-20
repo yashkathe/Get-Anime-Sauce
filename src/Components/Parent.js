@@ -1,7 +1,7 @@
 import React from "react";
 
 import Card from "../UI/Card";
-import uploadIcon from "../assets/upload_blue.png";
+import uploadIcon from "../assets/upload.png";
 
 import { motion } from "framer-motion";
 import classes from "./Parent.module.css";

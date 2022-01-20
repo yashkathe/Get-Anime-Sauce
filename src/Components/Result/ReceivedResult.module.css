@@ -1,0 +1,27 @@
+/* result style */
+
+.backdrop{
+    z-index: 8;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.result{
+    z-index: 10;
+    height: 50vh;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(51, 110, 112);
+    border-radius: 55px 55px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
