@@ -41,7 +41,7 @@ const UploadForm = () => {
     //state for fetching data
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [dataFetch, setDataFetched] = useState(false);
+    const [dataFetched, setDataFetched] = useState(false);
     const [receivedData, setReceivedData] = useState([]);
 
     const photoHandler = () => {
@@ -81,10 +81,10 @@ const UploadForm = () => {
             }
 
             const data = await response.json();
+            setReceivedData(data);
             setError(false);
             setIsLoading(false);
             setDataFetched(true);
-            setReceivedData(data);
         } catch (err) {
             setError(err.message);
             setIsLoading(false);
@@ -165,7 +165,7 @@ const UploadForm = () => {
             )}
 
             {/* result */}
-            {isLoading === false && dataFetch === true && !error && (
+            {isLoading === false && dataFetched === true && !error && (
                 <ReceivedResult
                     items={receivedData}
                     popupCloseHandler={popupHandlerTwo}

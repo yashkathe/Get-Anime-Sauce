@@ -12,7 +12,7 @@
 
 .result{
     z-index: 10;
-    height: 50vh;
+    height: 60vh;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -25,3 +25,20 @@
     justify-content: center;
 }
 
+.result > h1 {
+    font-style: italic;
+    font-size:50px;
+    margin: 0;
+}
+
+.result > h2 {
+    font-size:35px;
+}
+
+.result > video{
+    height: 15rem;
+}
+
+.result > h4 {
+    font-size:20px;
+}

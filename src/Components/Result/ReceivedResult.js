@@ -1,12 +1,17 @@
 import React from "react";
 import classes from "./ReceivedResult.module.css";
 
-
 function ReceivedResult(props) {
 
-    // console.log(props.items.result[0]);
-    const data1 = props.items
-    console.log(data1.result[0])
+        const receivedData = props.items;
+        // console.log(receivedData.result[0]);
+        console.log(receivedData.result[0].anilist.title.english);
+        console.log(receivedData.result[0].episode);
+        console.log(receivedData.result[0].similarity);
+        console.log(receivedData.result[0].video);
+
+
+
 
     return (
         <React.Fragment>
@@ -20,14 +25,15 @@ function ReceivedResult(props) {
             {/* result */}
 
             <div className={classes.result}>
-                <h1>HUNTER×HUNTER (2011)</h1>
-                <h2>Episode: 42</h2>
+                <h1>{receivedData.result[0].anilist.title.english}</h1>
+                <h2>Episode: {receivedData.result[0].episode}</h2>
                 <video
-                    src='https://media.trace.moe/video/11061/%5BDymy%5D%5BHunter%20X%20Hunter%5D%5B075%5D%5BBIG5%5D%5B1280X720%5D.mp4?t=61.795&token=785EQALuRm3RoiWnHLdG9dfTSI'
+                    src={receivedData.result[0].video}
                     autoPlay={true}
                     loop={true}
                     muted={true}
                 ></video>
+                <h4>Similarity : {receivedData.result[0].similarity}</h4>
             </div>
         </React.Fragment>
     );
