@@ -7,14 +7,8 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.backdrop.disable {
-    display: none;
-}
-
 .error {
     position: fixed;
-    top: 50vh;
-    left: 51vw;
     height: 13rem;
     width: 22rem;
     display: flex;

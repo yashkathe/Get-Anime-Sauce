@@ -39,10 +39,10 @@ const UploadForm = () => {
     const [isUrl, setIsUrl] = useState(true);
 
     //state for fetching data
-    const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [dataFetched, setDataFetched] = useState(false);
     const [receivedData, setReceivedData] = useState([]);
+    const [error ,setError] = useState(null)
 
     const photoHandler = () => {
         setIsUrl(false);
@@ -54,14 +54,9 @@ const UploadForm = () => {
         setIsUrl(true);
     };
 
-    const popupHandler = () => {
-        setError(null);
-        console.log("close");
-    };
-
     const popupHandlerTwo = () => {
-        setDataFetched(false)
-    }
+        setDataFetched(false);
+    };
 
     //http request
 
@@ -86,9 +81,10 @@ const UploadForm = () => {
             setIsLoading(false);
             setDataFetched(true);
         } catch (err) {
-            setError(err.message);
             setIsLoading(false);
             setDataFetched(false);
+            setError(err.message);
+            console.log(error)
         }
 
         urlRef.current.value = "";
@@ -157,12 +153,9 @@ const UploadForm = () => {
                 </button>
             </div>
 
-            {/* spinner  and error msg*/}
+            {/* spinner  and gotError msg*/}
 
             {isLoading === true && <Spinner />}
-            {error && (
-                <Errormsg errorMsg={error} popupCloseHandler={popupHandler} />
-            )}
 
             {/* result */}
             {isLoading === false && dataFetched === true && !error && (
@@ -171,6 +164,11 @@ const UploadForm = () => {
                     popupCloseHandler={popupHandlerTwo}
                 />
             )}
+
+            <Errormsg
+                gotError={error}
+                setError={setError}
+            />
         </React.Fragment>
     );
 };
