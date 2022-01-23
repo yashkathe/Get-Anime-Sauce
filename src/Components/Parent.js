@@ -8,23 +8,22 @@ import classes from "./Parent.module.css";
 import UploadForm from "../Components/Form/UploadForm";
 
 const MainForm = () => {
-
     // variants and hover
 
     const hover = {
-        scale: 1.3
-    }
+        scale: 1.3,
+    };
 
     return (
         <Card className={classes.Card}>
-            <motion.div className={classes.iconContainer} whileHover={hover} >
+            <div className={classes.iconContainer} whileHover={hover}>
                 <motion.img src={uploadIcon} alt='upload' />
-            </motion.div>
+            </div>
             <div className={classes.info}>
                 Upload an image or drop a url to to get the anime you want
             </div>
             <div>
-                <UploadForm/>
+                <UploadForm />
             </div>
         </Card>
     );

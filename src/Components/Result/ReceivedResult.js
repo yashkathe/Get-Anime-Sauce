@@ -1,17 +1,16 @@
 import React from "react";
 import classes from "./ReceivedResult.module.css";
 
+import {motion } from "framer-motion";
+
 function ReceivedResult(props) {
+    //fetched data
 
-        const receivedData = props.items;
-        // console.log(receivedData.result[0]);
-        console.log(receivedData.result[0].anilist.title.english);
-        console.log(receivedData.result[0].episode);
-        console.log(receivedData.result[0].similarity);
-        console.log(receivedData.result[0].video);
-
-
-
+    const receivedData = props.items;
+    console.log(receivedData.result[0].anilist.title.english);
+    console.log(receivedData.result[0].episode);
+    console.log(receivedData.result[0].similarity);
+    console.log(receivedData.result[0].video);
 
     return (
         <React.Fragment>
@@ -24,7 +23,9 @@ function ReceivedResult(props) {
 
             {/* result */}
 
-            <div className={classes.result}>
+            <motion.div
+                className={classes.result}
+            >
                 <h1>{receivedData.result[0].anilist.title.english}</h1>
                 <h2>Episode: {receivedData.result[0].episode}</h2>
                 <video
@@ -34,7 +35,7 @@ function ReceivedResult(props) {
                     muted={true}
                 ></video>
                 <h4>Similarity : {receivedData.result[0].similarity}</h4>
-            </div>
+            </motion.div>
         </React.Fragment>
     );
 }
