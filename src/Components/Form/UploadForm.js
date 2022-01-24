@@ -42,7 +42,7 @@ const UploadForm = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [dataFetched, setDataFetched] = useState(false);
     const [receivedData, setReceivedData] = useState([]);
-    const [error ,setError] = useState(null)
+    const [error, setError] = useState(null);
 
     const photoHandler = () => {
         setIsUrl(false);
@@ -52,10 +52,6 @@ const UploadForm = () => {
 
     const urlHandler = () => {
         setIsUrl(true);
-    };
-
-    const popupHandlerTwo = () => {
-        setDataFetched(false);
     };
 
     //http request
@@ -84,7 +80,7 @@ const UploadForm = () => {
             setIsLoading(false);
             setDataFetched(false);
             setError(err.message);
-            console.log(error)
+            console.log(error);
         }
 
         urlRef.current.value = "";
@@ -158,17 +154,15 @@ const UploadForm = () => {
             {isLoading === true && <Spinner />}
 
             {/* result */}
-            {isLoading === false && dataFetched === true && !error && (
-                <ReceivedResult
-                    items={receivedData}
-                    popupCloseHandler={popupHandlerTwo}
-                />
-            )}
-
-            <Errormsg
-                gotError={error}
-                setError={setError}
+            <ReceivedResult
+                items={receivedData}
+                isLoading={isLoading}
+                dataFetched={dataFetched}
+                error={error}
+                setDataFetched={setDataFetched}
             />
+
+            <Errormsg gotError={error} setError={setError} />
         </React.Fragment>
     );
 };

@@ -1,41 +1,86 @@
 import React from "react";
 import classes from "./ReceivedResult.module.css";
 
-import {motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
-function ReceivedResult(props) {
-    //fetched data
+function ReceivedResult({
+    items,
+    isLoading,
+    dataFetched,
+    error,
+    setDataFetched,
+}) {
+    //variants
+    const backdropAnimation = {
+        hidden: {
+            opacity: 0,
+        },
+        visible: {
+            opacity: 1,
+            transition: { duration: 1 },
+        },
+    };
 
-    const receivedData = props.items;
-    console.log(receivedData.result[0].anilist.title.english);
-    console.log(receivedData.result[0].episode);
-    console.log(receivedData.result[0].similarity);
-    console.log(receivedData.result[0].video);
+    const resultModal = {
+        hidden: {
+            y: "50vh",
+        },
+        visible: {
+            y: "0vh",
+            transition: { type: "tween", duration: 1 },
+        },
+        exit: {
+            y: "50vh",
+            transition: { duration: 1 },
+        },
+    };
+
+    const receivedData = items;
+
+    const popupHandler = () => {
+        setDataFetched(false);
+    };
 
     return (
         <React.Fragment>
-            {/* backdrop */}
+            <AnimatePresence>
+                {isLoading === false && dataFetched === true && !error && (
+                    <React.Fragment>
+                        <motion.div
+                            className={classes.backdrop}
+                            onClick={popupHandler}
+                            variants={backdropAnimation}
+                            initial='hidden'
+                            animate='visible'
+                            exit='hidden'
+                        ></motion.div>
 
-            <div
-                className={classes.backdrop}
-                onClick={props.popupCloseHandler}
-            ></div>
+                        {/* result */}
 
-            {/* result */}
-
-            <motion.div
-                className={classes.result}
-            >
-                <h1>{receivedData.result[0].anilist.title.english}</h1>
-                <h2>Episode: {receivedData.result[0].episode}</h2>
-                <video
-                    src={receivedData.result[0].video}
-                    autoPlay={true}
-                    loop={true}
-                    muted={true}
-                ></video>
-                <h4>Similarity : {receivedData.result[0].similarity}</h4>
-            </motion.div>
+                        <motion.div
+                            className={classes.result}
+                            variants={resultModal}
+                            initial='hidden'
+                            animate='visible'
+                            exit='exit'
+                        >
+                            <h1>
+                                {receivedData.result[0].anilist.title.english}
+                            </h1>
+                            <h2>Episode: {receivedData.result[0].episode}</h2>
+                            <video
+                                src={receivedData.result[0].video}
+                                autoPlay={true}
+                                loop={true}
+                                muted={true}
+                            ></video>
+                            <h4>
+                                Similarity : {receivedData.result[0].similarity}
+                            </h4>
+                        </motion.div>
+                    </React.Fragment>
+                )}
+            </AnimatePresence>
         </React.Fragment>
     );
 }
