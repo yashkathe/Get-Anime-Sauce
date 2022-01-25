@@ -73,3 +73,7 @@
     padding: 1rem;
     border-radius: 44px;
 }
+
+.fileInput{
+    display: none;
+}

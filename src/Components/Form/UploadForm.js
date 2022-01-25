@@ -13,8 +13,6 @@ import Errormsg from "../../UI/Errormsg";
 const UploadForm = () => {
     //refs
 
-    const inputFile = useRef(null);
-
     const urlRef = useRef();
 
     // variants and hover
@@ -38,17 +36,33 @@ const UploadForm = () => {
     //state for assigning css classes
     const [isUrl, setIsUrl] = useState(true);
 
+    //state for getting image by upload
+    const [getImage, setGetImage] = useState(null);
+
     //state for fetching data
     const [isLoading, setIsLoading] = useState(false);
     const [dataFetched, setDataFetched] = useState(false);
     const [receivedData, setReceivedData] = useState([]);
     const [error, setError] = useState(null);
 
-    const photoHandler = () => {
+    function photoHandler(event) {
         setIsUrl(false);
-        inputFile.current.click();
-        console.log(inputFile);
-    };
+        const reader = new FileReader();
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setGetImage(reader.result);
+            }
+        };
+        reader.readAsDataURL(event.target.files[0]);
+
+        if(getImage){
+            console.log(getImage)
+        }
+    }
+
+    if(getImage){
+        console.log(getImage)
+    }
 
     const urlHandler = () => {
         setIsUrl(true);
@@ -94,22 +108,22 @@ const UploadForm = () => {
                 <div>
                     <input
                         type='file'
-                        className={classes.fileUpload}
-                        ref={inputFile}
+                        name='imageUpload'
+                        id='input'
+                        accept='image/*'
+                        className={classes.fileInput}
+                        onChange={photoHandler}
                     />
-                    <motion.button
-                        className={`${classes.optButton} ${
-                            !isUrl && classes.optButtonActive
-                        }`}
-                        onClick={photoHandler}
-                        whileHover={hover}
-                    >
-                        <img
-                            className={classes.upIcons}
+                    <label htmlFor='input'>
+                        <motion.img
+                            className={`${classes.optButton} ${
+                                !isUrl && classes.optButtonActive
+                            }`}
                             src={folderIcon}
+                            whileHover={hover}
                             alt='folder Icon'
-                        ></img>
-                    </motion.button>
+                        ></motion.img>
+                    </label>
                 </div>
 
                 {/* url insert button  */}
