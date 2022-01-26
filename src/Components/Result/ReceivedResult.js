@@ -64,16 +64,45 @@ function ReceivedResult({
                             animate='visible'
                             exit='exit'
                         >
-                            <h1>
-                                {receivedData.result[0].anilist.title.english}
-                            </h1>
-                            <h2>Episode: {receivedData.result[0].episode}</h2>
+                            {/* title */}
+                            {receivedData.result[0].anilist.title.english ===
+                            null ? (
+                                <h1>
+                                    {
+                                        receivedData.result[0].anilist.title
+                                            .romaji
+                                    }
+                                </h1>
+                            ) : (
+                                <h1>
+                                    {
+                                        receivedData.result[0].anilist.title
+                                            .english
+                                    }
+                                </h1>
+                            )}
+
+                            {/* episode  */}
+
+                            {receivedData.result[0].episode === null ? (
+                                <h3>Couldn't identify the episode</h3>
+                            ) : (
+                                <h2>
+                                    Episode: {receivedData.result[0].episode}
+                                </h2>
+                            )}
+
+                            {/* video */}
+
                             <video
                                 src={receivedData.result[0].video}
                                 autoPlay={true}
                                 loop={true}
                                 muted={true}
                             ></video>
+
+                            {/* similarity */}
+
                             <h4>
                                 Similarity : {receivedData.result[0].similarity}
                             </h4>
