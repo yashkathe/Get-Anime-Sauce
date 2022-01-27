@@ -8,7 +8,7 @@ import ReceivedResult from "../Result/ReceivedResult";
 import Spinner from "../../UI/Spinner";
 
 import classes from "./UploadForm.module.css";
-import Errormsg from "../../UI/Errormsg";
+import Errormsg from "../Errormsg";
 
 const UploadForm = () => {
     //refs
@@ -47,26 +47,44 @@ const UploadForm = () => {
 
     function photoHandler(event) {
         setIsUrl(false);
-        const reader = new FileReader();
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                setGetImage(reader.result);
-            }
-        };
-        reader.readAsDataURL(event.target.files[0]);
-
-        if(getImage){
-            console.log(getImage)
-        }
+        setGetImage(event.target.files[0]);
     }
 
-    if(getImage){
-        console.log(getImage)
-    }
-
-    const urlHandler = () => {
+    const urlHandlerTrue = () => {
         setIsUrl(true);
     };
+
+    //photo handler
+
+    async function fetchPhotoHandler() {
+        setError(null);
+        setIsLoading(true);
+        setDataFetched(false);
+        const formData = new FormData();
+        formData.append("image", getImage);
+
+        try {
+            const response = await fetch("https://api.trace.moe/search?anilistInfo", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error("Request failed or Incorrect image url");
+            }
+            const data = await response.json();
+            console.log(data);
+            setReceivedData(data);
+            setError(false);
+            setIsLoading(false);
+            setDataFetched(true);
+        } catch (err) {
+            setIsLoading(false);
+            setDataFetched(false);
+            setError(err.message);
+            console.log(error);
+        }
+    }
 
     //http request
 
@@ -86,6 +104,7 @@ const UploadForm = () => {
             }
 
             const data = await response.json();
+            console.log(data);
             setReceivedData(data);
             setError(false);
             setIsLoading(false);
@@ -133,7 +152,7 @@ const UploadForm = () => {
                         className={`${classes.optButton} ${
                             isUrl && classes.optButtonActive
                         }`}
-                        onClick={urlHandler}
+                        onClick={urlHandlerTrue}
                         whileHover={hover}
                     >
                         <img
@@ -158,9 +177,15 @@ const UploadForm = () => {
                 />
             </div>
             <div className={classes.submit}>
-                <button type='submit' onClick={fetchUrlHandler}>
-                    Submit
-                </button>
+                {isUrl ? (
+                    <button type='submit' onClick={fetchUrlHandler}>
+                        Submit
+                    </button>
+                ) : (
+                    <button type='submit' onClick={fetchPhotoHandler}>
+                        Submit
+                    </button>
+                )}
             </div>
 
             {/* spinner  and gotError msg*/}
