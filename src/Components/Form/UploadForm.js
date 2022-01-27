@@ -46,12 +46,15 @@ const UploadForm = () => {
     const [error, setError] = useState(null);
 
     function photoHandler(event) {
-        setIsUrl(false);
         setGetImage(event.target.files[0]);
     }
 
     const urlHandlerTrue = () => {
         setIsUrl(true);
+    };
+
+    const urlHandlerFalse = () => {
+        setIsUrl(false);
     };
 
     //photo handler
@@ -84,6 +87,8 @@ const UploadForm = () => {
             setError(err.message);
             console.log(error);
         }
+
+        setGetImage(null)
     }
 
     //http request
@@ -132,6 +137,7 @@ const UploadForm = () => {
                         accept='image/*'
                         className={classes.fileInput}
                         onChange={photoHandler}
+                        onClick={urlHandlerFalse}
                     />
                     <label htmlFor='input'>
                         <motion.img
