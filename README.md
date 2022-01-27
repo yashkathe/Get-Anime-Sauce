@@ -9,14 +9,11 @@ It tells you which anime, which episode, and the exact moment this scene appears
 
 This web app uses the trace moe api. [Official repository](https://github.com/soruly/trace.moe)
 
-Trace.moe is an Anime Scene Search Engine that helps users to trace back the original anime 
-by a screenshot. It search in ~30000 hours of anime and find the best matching scene. 
-It can tell the anime, the episode and the exact time that scene appears. [Read more](https://trace.moe/about) 
-
-
 [Official trace moe docs](https://soruly.github.io/trace.moe-api/#/docs) 
 
-
+Trace.moe is an Anime Scene Search Engine that helps users to trace back the original anime 
+by a screenshot. It searches in ~30000 hours of anime and find the best matching scene. 
+It can tell the anime, the episode and the exact time that scene appears. [Read more](https://trace.moe/about) 
 
 ## Run this project on your machine
 
