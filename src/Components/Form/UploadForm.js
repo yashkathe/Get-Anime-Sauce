@@ -31,6 +31,16 @@ const UploadForm = () => {
         },
     };
 
+    const submitBtnAnimate = {
+        hover: {
+            scale: 1.1,
+            boxShadow: "1px 1px 10px rgba(0,0,0,0.5)",
+            transition: {
+                type: "tween",
+            },
+        },
+    };
+
     // state handling
 
     //state for assigning css classes
@@ -67,13 +77,16 @@ const UploadForm = () => {
         formData.append("image", getImage);
 
         try {
-            const response = await fetch("https://api.trace.moe/search?anilistInfo", {
-                method: "POST",
-                body: formData,
-            });
+            const response = await fetch(
+                "https://api.trace.moe/search?anilistInfo",
+                {
+                    method: "POST",
+                    body: formData,
+                }
+            );
 
             if (!response.ok) {
-                throw new Error("Request failed or Incorrect image url");
+                throw new Error("Error ! Image format mostly not supported");
             }
             const data = await response.json();
             console.log(data);
@@ -85,10 +98,9 @@ const UploadForm = () => {
             setIsLoading(false);
             setDataFetched(false);
             setError(err.message);
-            console.log(error);
         }
 
-        setGetImage(null)
+        setGetImage(null);
     }
 
     //http request
@@ -118,7 +130,6 @@ const UploadForm = () => {
             setIsLoading(false);
             setDataFetched(false);
             setError(err.message);
-            console.log(error);
         }
 
         urlRef.current.value = "";
@@ -126,6 +137,9 @@ const UploadForm = () => {
 
     return (
         <React.Fragment>
+            <div>
+                
+            </div>
             <div className={classes.altButtons}>
                 {/* add folder button  */}
 
@@ -154,15 +168,11 @@ const UploadForm = () => {
                 {/* url insert button  */}
 
                 <div>
-                    <motion.button
-                        className={`${classes.optButton} ${
-                            isUrl && classes.optButtonActive
-                        }`}
-                        onClick={urlHandlerTrue}
-                        whileHover={hover}
-                    >
+                    <motion.button onClick={urlHandlerTrue} whileHover={hover}>
                         <img
-                            className={classes.upIcons}
+                            className={`${classes.optButton} ${
+                                isUrl && classes.optButtonActive
+                            }`}
                             src={urlIcon}
                             alt='attachment chain Icon'
                         ></img>
@@ -170,7 +180,7 @@ const UploadForm = () => {
                 </div>
             </div>
 
-            {/* rest of the form  */}
+            {/* rest of the form : input for url and submit button */}
 
             <div className={classes.urlDiv}>
                 <motion.input
@@ -184,13 +194,23 @@ const UploadForm = () => {
             </div>
             <div className={classes.submit}>
                 {isUrl ? (
-                    <button type='submit' onClick={fetchUrlHandler}>
+                    <motion.button
+                        type='submit'
+                        onClick={fetchUrlHandler}
+                        variants={submitBtnAnimate}
+                        whileHover='hover'
+                    >
                         Submit
-                    </button>
+                    </motion.button>
                 ) : (
-                    <button type='submit' onClick={fetchPhotoHandler}>
+                    <motion.button
+                        type='submit'
+                        onClick={fetchPhotoHandler}
+                        variants={submitBtnAnimate}
+                        whileHover='hover'
+                    >
                         Submit
-                    </button>
+                    </motion.button>
                 )}
             </div>
 

@@ -1,16 +1,16 @@
 /* result style */
 
-.backdrop{
+.backdrop {
     z-index: 8;
     height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     position: fixed;
     top: 0;
     left: 0;
 }
 
-.result{
+.result {
     z-index: 10;
     position: fixed;
     bottom: 0;
@@ -26,23 +26,53 @@
 
 .result > h1 {
     font-style: italic;
-    font-size:50px;
+    font-size: 50px;
     margin: 0;
     padding-top: 1rem;
 }
 
+@media (max-width: 65rem) {
+    .result > h1 {
+        font-size: 40px;
+    }
+}
+
 .result > h2 {
-    font-size:35px;
+    font-size: 35px;
+}
+
+@media (max-width: 65rem) {
+    .result > h2 {
+        font-size: 30px;
+    }
 }
 
 .result > h3 {
-    font-size:25px;
+    font-size: 25px;
 }
 
-.result > video{
+@media (max-width: 65rem) {
+    .result > h3 {
+        font-size: 20px;
+    }
+}
+
+.result > video {
     height: 15rem;
 }
 
+@media (max-width: 65rem) {
+    .result > video {
+        height: 13rem;
+    }
+}
+
 .result > h4 {
-    font-size:20px;
+    font-size: 20px;
+}
+
+@media (max-width: 65rem) {
+    .result > h4 {
+        font-size: 18px;
+    }
 }

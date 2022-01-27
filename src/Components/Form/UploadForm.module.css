@@ -7,7 +7,7 @@
 }
 
 .altButtons > div {
-    margin: 1rem 1.5rem;
+    margin: 1rem 1.2rem;
     box-sizing: border-box;
     border-radius: 50%;
 }
@@ -16,47 +16,64 @@
     display: none;
 }
 
-.upIcons {
-    height: 3.5rem;
-}
-
 .optButton {
     padding: 1rem;
     border-radius: 50%;
-    cursor:pointer
+    cursor: pointer;
+}
+
+@media (max-width: 65rem) {
+    .optButton {
+        height: 3.5rem;
+    }
 }
 
 .optButtonActive {
-    padding: 1rem;
+    padding: 1.1rem;
     border-radius: 50%;
     background-color: rgba(255, 245, 238, 0.8);
 }
 
+@media (max-width: 65rem) {
+    .optButtonActive {
+        height: 3.5rem;
+    }
+}
 .btn {
     color: black;
 }
 
 .urlInput {
-    height: 2.5rem;
-    margin: 2rem;
+    height: 3rem;
+    box-sizing: border-box;
+    margin: 2rem 1rem  ;
     border-radius: 45px;
-    width: 90%;
+    width: 95%;
     opacity: 1;
     text-align: center;
     transition: 1000ms;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 65rem) {
+    .urlInput {
+        height: 2.8rem;
+    }
 }
 
 .urlInput.cancel {
     width: 0;
     opacity: 0;
+    margin: 0;
+    height: 0;
 }
 
-.urlDiv > input {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+/* .urlDiv {
+    text-align: center;
+} */
 
 .submit {
     margin: 1rem;
@@ -75,6 +92,12 @@
     border-radius: 44px;
 }
 
-.fileInput{
+@media(max-width: 65rem){
+    .submit > button {
+        font-size: 24px;
+    }
+}
+
+.fileInput {
     display: none;
 }

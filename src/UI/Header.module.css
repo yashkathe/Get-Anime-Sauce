@@ -1,23 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Heebo&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Heebo&display=swap");
 
-.divHeader{
+.divHeader {
     /* width: calc(100%_- 20px); */
     margin-top: 5vh;
     height: 6.5vh;
     z-index: 10;
-    font-family: 'Heebo', sans-serif;
+    font-family: "Heebo", sans-serif;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     margin-left: 10rem;
     margin-right: 10rem;
-    box-shadow: 5px 1px 5px 3px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.5);
     border-radius: 40px;
-    background-color: rgba(13,151,172,0.9);
+    background-color: rgba(13, 151, 172, 0.9);
 }
 
-.divOne{
+@media (max-width: 65rem) {
+    .divHeader {
+        margin-left: 5rem;
+        margin-right: 5rem;
+    }
+}
+
+.divOne {
     display: inline-block;
     width: 50%;
     height: 100%;
@@ -30,7 +37,13 @@
     font-weight: bold;
 }
 
-.divTwo{
+@media (max-width: 65rem) {
+    .divOne {
+        font-size: 28px;
+    }
+}
+
+.divTwo {
     display: inline-block;
     width: 45%;
     height: 100%;
@@ -40,4 +53,10 @@
     justify-content: flex-end;
     padding: 0px 3rem;
     font-size: 25px;
+}
+
+@media (max-width: 65rem) {
+    .divTwo {
+        font-size: 20px;
+    }
 }

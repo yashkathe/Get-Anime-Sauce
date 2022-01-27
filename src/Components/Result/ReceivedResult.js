@@ -14,6 +14,7 @@ function ReceivedResult({
     const backdropAnimation = {
         hidden: {
             opacity: 0,
+            transition: {duration: 1}
         },
         visible: {
             opacity: 1,

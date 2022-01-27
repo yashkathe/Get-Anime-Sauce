@@ -20,7 +20,7 @@ const MainForm = () => {
                 <motion.img src={uploadIcon} alt='upload' />
             </div>
             <div className={classes.info}>
-                Upload an image or drop a url to to get the anime you want
+                Upload an image or drop a url of an anime you want to search
             </div>
             <div>
                 <UploadForm />
