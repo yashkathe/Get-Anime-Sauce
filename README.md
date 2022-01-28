@@ -35,6 +35,6 @@ It can tell the anime, the episode and the exact time that scene appears. [Read 
 ```
 ## Feedback
 
-If you have any feedback, please reach out to us at katheyash@yahoo.com
+If you have any feedback, please reach out to me at katheyash@yahoo.com
 
 
