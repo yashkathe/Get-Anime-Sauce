@@ -12,6 +12,12 @@
     }
 }
 
+@media (max-width:49rem){
+    .altButtons{
+        margin: 0rem;
+    }
+}
+
 .altButtons > div {
     margin: 1rem 1.2rem;
     box-sizing: border-box;
@@ -83,6 +89,12 @@
     }
 }
 
+@media (max-width: 28rem) {
+    .urlInput {
+        margin-top:1rem;
+    }
+}
+
 .urlInput.cancel {
     width: 0;
     opacity: 0;
@@ -114,6 +126,12 @@
 @media(max-width: 65rem){
     .submit > button {
         font-size: 24px;
+    }
+}
+
+@media(max-width: 27rem){
+    .submit > button {
+        font-size: 20px;
     }
 }
 

@@ -100,6 +100,7 @@ function ReceivedResult({
                                 autoPlay={true}
                                 loop={true}
                                 muted={true}
+                                playsInline={true}
                             ></video>
 
                             {/* similarity */}
