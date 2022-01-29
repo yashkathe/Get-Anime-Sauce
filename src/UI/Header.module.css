@@ -24,6 +24,20 @@
     }
 }
 
+@media (max-width: 40rem) {
+    .divHeader {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+}
+
+@media (max-width: 25rem) {
+    .divHeader {
+        margin-left: 1.8rem;
+        margin-right: 1.8rem;
+    }
+}
+
 .divOne {
     display: inline-block;
     width: 50%;
@@ -40,6 +54,22 @@
 @media (max-width: 65rem) {
     .divOne {
         font-size: 28px;
+    }
+}
+
+@media (max-width: 49rem) {
+    .divOne {
+        font-size: 25px;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 25rem) {
+    .divOne {
+        font-size: 18px;
+        width: 100%;
+        justify-content: center;
     }
 }
 
@@ -60,3 +90,16 @@
         font-size: 20px;
     }
 }
+
+@media (max-width: 49rem) {
+    .divTwo {
+        display: none;
+    }
+}
+
+@media (max-width: 25rem) {
+    .divTwo {
+        display: none;
+    }
+}
+

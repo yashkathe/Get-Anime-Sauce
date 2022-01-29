@@ -21,6 +21,10 @@ const UploadForm = () => {
         rotate: [0, -18, 18, -18, 18, 0],
     };
 
+    const tap = {
+        scale: 1.5
+    };
+
     const urlFocus = {
         scale: 1.2,
         borderBottom: "3px solid black",
@@ -137,9 +141,7 @@ const UploadForm = () => {
 
     return (
         <React.Fragment>
-            <div>
-                
-            </div>
+            <div></div>
             <div className={classes.altButtons}>
                 {/* add folder button  */}
 
@@ -160,6 +162,7 @@ const UploadForm = () => {
                             }`}
                             src={folderIcon}
                             whileHover={hover}
+                            whileTap={tap}
                             alt='folder Icon'
                         ></motion.img>
                     </label>
@@ -168,7 +171,11 @@ const UploadForm = () => {
                 {/* url insert button  */}
 
                 <div>
-                    <motion.button onClick={urlHandlerTrue} whileHover={hover}>
+                    <motion.button
+                        onClick={urlHandlerTrue}
+                        whileHover={hover}
+                        whileTap={tap}
+                    >
                         <img
                             className={`${classes.optButton} ${
                                 isUrl && classes.optButtonActive

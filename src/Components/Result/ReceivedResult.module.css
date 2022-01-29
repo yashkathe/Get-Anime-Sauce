@@ -29,11 +29,24 @@
     font-size: 50px;
     margin: 0;
     padding-top: 1rem;
+    text-align: center;
 }
 
 @media (max-width: 65rem) {
     .result > h1 {
         font-size: 40px;
+    }
+}
+
+@media (max-width: 49rem) {
+    .result > h1 {
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 25rem) {
+    .result > h1 {
+        font-size: 30px;
     }
 }
 
@@ -47,6 +60,12 @@
     }
 }
 
+@media (max-width: 25rem) {
+    .result > h2 {
+        font-size: 25px;
+    }
+}
+
 .result > h3 {
     font-size: 25px;
 }
@@ -54,6 +73,12 @@
 @media (max-width: 65rem) {
     .result > h3 {
         font-size: 20px;
+    }
+}
+
+@media (max-width: 25rem) {
+    .result > h3 {
+        font-size: 17px;
     }
 }
 
@@ -67,6 +92,12 @@
     }
 }
 
+@media (max-width: 25rem) {
+    .result > video {
+        height: 10rem;
+    }
+}
+
 .result > h4 {
     font-size: 20px;
 }
@@ -74,5 +105,11 @@
 @media (max-width: 65rem) {
     .result > h4 {
         font-size: 18px;
+    }
+}
+
+@media (max-width: 25rem) {
+    .result > h4 {
+        font-size: 15px;
     }
 }

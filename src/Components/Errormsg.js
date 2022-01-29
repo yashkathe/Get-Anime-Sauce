@@ -21,7 +21,6 @@ function Errormsg({ gotError, setError }) {
     const errorModal = {
         hidden: {
             y: "-100vh",
-
             opacity: 0,
         },
         visible: {

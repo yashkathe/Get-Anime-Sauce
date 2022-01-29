@@ -6,6 +6,12 @@
     margin: 1.5rem;
 }
 
+@media (max-width:49rem){
+    .altButtons{
+        margin: 1rem;
+    }
+}
+
 .altButtons > div {
     margin: 1rem 1.2rem;
     box-sizing: border-box;
@@ -28,6 +34,12 @@
     }
 }
 
+@media (max-width: 25rem) {
+    .optButton {
+        height: 3rem;
+    }
+}
+
 .optButtonActive {
     padding: 1.1rem;
     border-radius: 50%;
@@ -39,6 +51,13 @@
         height: 3.5rem;
     }
 }
+
+@media (max-width: 25rem) {
+    .optButtonActive {
+        height: 3rem;
+    }
+}
+
 .btn {
     color: black;
 }
