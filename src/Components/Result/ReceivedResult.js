@@ -3,18 +3,18 @@ import classes from "./ReceivedResult.module.css";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-function ReceivedResult({
+const ReceivedResult = ({
     items,
     isLoading,
     dataFetched,
     error,
     setDataFetched,
-}) {
+}) => {
     //variants
     const backdropAnimation = {
         hidden: {
             opacity: 0,
-            transition: {duration: 1}
+            transition: { duration: 1 },
         },
         visible: {
             opacity: 1,
@@ -114,6 +114,6 @@ function ReceivedResult({
             </AnimatePresence>
         </React.Fragment>
     );
-}
+};
 
 export default ReceivedResult;

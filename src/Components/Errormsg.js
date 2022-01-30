@@ -3,7 +3,7 @@ import React from "react";
 import classes from "./Errormsg.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 
-function Errormsg({ gotError, setError }) {
+const Errormsg = ({ gotError, setError }) => {
     //variants
 
     //backdrop variant

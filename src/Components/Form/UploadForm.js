@@ -22,7 +22,7 @@ const UploadForm = () => {
     };
 
     const tap = {
-        scale: 1.5
+        scale: 1.5,
     };
 
     const urlFocus = {
@@ -73,7 +73,7 @@ const UploadForm = () => {
 
     //photo handler
 
-    async function fetchPhotoHandler() {
+    const fetchPhotoHandler = async () => {
         setError(null);
         setIsLoading(true);
         setDataFetched(false);
@@ -105,11 +105,11 @@ const UploadForm = () => {
         }
 
         setGetImage(null);
-    }
+    };
 
     //http request
 
-    async function fetchUrlHandler() {
+    const fetchUrlHandler = async () => {
         setError(null);
         setIsLoading(true);
         setDataFetched(false);
@@ -137,7 +137,7 @@ const UploadForm = () => {
         }
 
         urlRef.current.value = "";
-    }
+    };
 
     return (
         <React.Fragment>
