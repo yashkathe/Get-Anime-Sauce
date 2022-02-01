@@ -15,6 +15,25 @@ Trace.moe is an Anime Scene Search Engine that helps users to trace back the ori
 by a screenshot. It searches in ~30000 hours of anime and find the best matching scene. 
 It can tell the anime, the episode and the exact time that scene appears. [Read more](https://trace.moe/about) 
 
+
+## How to use this site
+
+- Copy the image url and paste it in search bar
+
+![App Screenshot](https://raw.githubusercontent.com/yashkathe/Anime-sauce/master/src/assets/copyUrl.gif)
+
+![App Screenshot 2](https://raw.githubusercontent.com/yashkathe/Anime-sauce/master/src/assets/pasteUrl.gif)
+
+``or``
+
+- Directly add a local photo
+
+![App Screenshot 3](https://raw.githubusercontent.com/yashkathe/Anime-sauce/master/src/assets/insert-image.gif)
+
+- Optimised for mobile devices
+
+![App Screenshot 3](https://raw.githubusercontent.com/yashkathe/Anime-sauce/master/src/assets/mobileview.gif)
+
 ## Run this project on your machine
 
 - Clone this repository or download the zip file 
