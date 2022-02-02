@@ -32,7 +32,7 @@ It can tell the anime, the episode and the exact time that scene appears. [Read 
 
 - Optimised for mobile devices
 
-![App Screenshot 3](https://raw.githubusercontent.com/yashkathe/Anime-sauce/master/src/assets/mobileviewnew.gif)
+![App Screenshot 3](https://raw.githubusercontent.com/yashkathe/Anime-sauce/master/src/assets/mobileview.gif)
 
 ## Run this project on your machine
 
