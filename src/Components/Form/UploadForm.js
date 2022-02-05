@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState} from "react";
 
 import folderIcon from "../../assets/folder.png";
 import urlIcon from "../../assets/url.png";
@@ -10,48 +10,45 @@ import Spinner from "../../UI/Spinner";
 import classes from "./UploadForm.module.css";
 import Errormsg from "../Errormsg";
 
-const UploadForm = () => {
-    //refs
+// variants
 
-    const urlRef = useRef();
+const hover = {
+    rotate: [0, -18, 18, -18, 18, 0],
+};
 
-    // variants and hover
+const tap = {
+    scale: 1.5,
+};
 
-    const hover = {
-        rotate: [0, -18, 18, -18, 18, 0],
-    };
+const urlFocus = {
+    scale: 1.2,
+    borderBottom: "3px solid black",
+    boxShadow: "0 4px 6px rgba(0,0,0,0.5)",
+    transition: {
+        type: "spring",
+        duration: 0.1,
+    },
+};
 
-    const tap = {
-        scale: 1.5,
-    };
-
-    const urlFocus = {
-        scale: 1.2,
-        borderBottom: "3px solid black",
-        boxShadow: "0 4px 6px rgba(0,0,0,0.5)",
+const submitBtnAnimate = {
+    hover: {
+        scale: 1.1,
+        boxShadow: "1px 1px 10px rgba(0,0,0,0.5)",
         transition: {
-            type: "spring",
-            duration: 0.1,
+            type: "tween",
         },
-    };
+    },
+};
 
-    const submitBtnAnimate = {
-        hover: {
-            scale: 1.1,
-            boxShadow: "1px 1px 10px rgba(0,0,0,0.5)",
-            transition: {
-                type: "tween",
-            },
-        },
-    };
-
+const UploadForm = () => {
     // state handling
 
     //state for assigning css classes
     const [isUrl, setIsUrl] = useState(true);
 
-    //state for getting image by upload
+    //state for getting image by upload and url from input
     const [getImage, setGetImage] = useState(null);
+    const [getUrl, setGetUrl] = useState("");
 
     //state for fetching data
     const [isLoading, setIsLoading] = useState(false);
@@ -59,9 +56,14 @@ const UploadForm = () => {
     const [receivedData, setReceivedData] = useState([]);
     const [error, setError] = useState(null);
 
-    function photoHandler(event) {
+    const getPhotoHandler = (event) => {
         setGetImage(event.target.files[0]);
-    }
+    };
+
+    const getUrlHandler = (event) => {
+        setGetUrl(event.target.value)
+        console.log(event.target.value)
+    };
 
     const urlHandlerTrue = () => {
         setIsUrl(true);
@@ -113,12 +115,12 @@ const UploadForm = () => {
         setError(null);
         setIsLoading(true);
         setDataFetched(false);
+        console.log('get url =' ,getUrl)
         try {
-            const response = await fetch(
-                `https://api.trace.moe/search?anilistInfo&url=${encodeURIComponent(
-                    `${urlRef.current.value}`
-                )}`
-            );
+            const apiLink = `https://api.trace.moe/search?anilistInfo&url=${encodeURIComponent(
+                `${getUrl}`
+              )}`
+            const response = await fetch(apiLink);
 
             if (!response.ok) {
                 throw new Error("Request failed or Incorrect image url");
@@ -136,7 +138,7 @@ const UploadForm = () => {
             setError(err.message);
         }
 
-        urlRef.current.value = "";
+        setGetUrl("");
     };
 
     return (
@@ -152,7 +154,7 @@ const UploadForm = () => {
                         id='input'
                         accept='image/*'
                         className={classes.fileInput}
-                        onChange={photoHandler}
+                        onChange={getPhotoHandler}
                         onClick={urlHandlerFalse}
                     />
                     <label htmlFor='input'>
@@ -196,7 +198,8 @@ const UploadForm = () => {
                     }`}
                     placeholder='Image URL'
                     whileFocus={urlFocus}
-                    ref={urlRef}
+                    onChange={getUrlHandler}
+                    value={getUrl}
                 />
             </div>
             <div className={classes.submit}>
