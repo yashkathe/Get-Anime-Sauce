@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 
 import folderIcon from "../../assets/folder.png";
 import urlIcon from "../../assets/url.png";
@@ -9,6 +9,7 @@ import Spinner from "../../UI/Spinner";
 
 import classes from "./UploadForm.module.css";
 import Errormsg from "../Errormsg";
+import useHttp from "../../Hooks/use-http";
 
 // variants
 
@@ -48,21 +49,13 @@ const UploadForm = () => {
 
     //state for getting image by upload and url from input
     const [getImage, setGetImage] = useState(null);
-    const [getUrl, setGetUrl] = useState("");
-
-    //state for fetching data
-    const [isLoading, setIsLoading] = useState(false);
-    const [dataFetched, setDataFetched] = useState(false);
-    const [receivedData, setReceivedData] = useState([]);
-    const [error, setError] = useState(null);
 
     const getPhotoHandler = (event) => {
         setGetImage(event.target.files[0]);
     };
 
     const getUrlHandler = (event) => {
-        setGetUrl(event.target.value)
-        console.log(event.target.value)
+        setGetUrl(event.target.value);
     };
 
     const urlHandlerTrue = () => {
@@ -73,77 +66,35 @@ const UploadForm = () => {
         setIsUrl(false);
     };
 
-    //photo handler
 
-    const fetchPhotoHandler = async () => {
-        setError(null);
-        setIsLoading(true);
-        setDataFetched(false);
-        const formData = new FormData();
-        formData.append("image", getImage);
+    //calling the hook
+    const {
+        isLoading,
+        dataFetched,
+        setDataFetched,
+        error,
+        getUrl,
+        setGetUrl,
+        setError,
+        receivedData,
+        sendRequest: fetchUrlHandler,
+    } = useHttp();
 
-        try {
-            const response = await fetch(
-                "https://api.trace.moe/search?anilistInfo",
-                {
-                    method: "POST",
-                    body: formData,
-                }
-            );
+    const clearData = () => {
+        setGetUrl("")
+    }
 
-            if (!response.ok) {
-                throw new Error("Error ! Image format mostly not supported");
-            }
-            const data = await response.json();
-            console.log(data);
-            setReceivedData(data);
-            setError(false);
-            setIsLoading(false);
-            setDataFetched(true);
-        } catch (err) {
-            setIsLoading(false);
-            setDataFetched(false);
-            setError(err.message);
-        }
-
-        setGetImage(null);
-    };
-
-    //http request
-
-    const fetchUrlHandler = async () => {
-        setError(null);
-        setIsLoading(true);
-        setDataFetched(false);
-        console.log('get url =' ,getUrl)
-        try {
-            const apiLink = `https://api.trace.moe/search?anilistInfo&url=${encodeURIComponent(
+    const fetchUrl = async () => {
+        fetchUrlHandler({
+            url: `https://api.trace.moe/search?anilistInfo&url=${encodeURIComponent(
                 `${getUrl}`
-              )}`
-            const response = await fetch(apiLink);
-
-            if (!response.ok) {
-                throw new Error("Request failed or Incorrect image url");
-            }
-
-            const data = await response.json();
-            console.log(data);
-            setReceivedData(data);
-            setError(false);
-            setIsLoading(false);
-            setDataFetched(true);
-        } catch (err) {
-            setIsLoading(false);
-            setDataFetched(false);
-            setError(err.message);
-        }
-
-        setGetUrl("");
+            )}`,
+            clearData,
+        });
     };
 
     return (
         <React.Fragment>
-            <div></div>
             <div className={classes.altButtons}>
                 {/* add folder button  */}
 
@@ -203,30 +154,21 @@ const UploadForm = () => {
                 />
             </div>
             <div className={classes.submit}>
-                {isUrl ? (
-                    <motion.button
-                        type='submit'
-                        onClick={fetchUrlHandler}
-                        variants={submitBtnAnimate}
-                        whileHover='hover'
-                    >
-                        Submit
-                    </motion.button>
-                ) : (
-                    <motion.button
-                        type='submit'
-                        onClick={fetchPhotoHandler}
-                        variants={submitBtnAnimate}
-                        whileHover='hover'
-                    >
-                        Submit
-                    </motion.button>
-                )}
+                <motion.button
+                    type='submit'
+                    onClick={fetchUrl}
+                    variants={submitBtnAnimate}
+                    whileHover='hover'
+                >
+                    Submit
+                </motion.button>
             </div>
 
             {/* spinner  and gotError msg*/}
 
             {isLoading === true && <Spinner />}
+
+            <Errormsg gotError={error} setError={setError} />
 
             {/* result */}
             <ReceivedResult
@@ -236,8 +178,6 @@ const UploadForm = () => {
                 error={error}
                 setDataFetched={setDataFetched}
             />
-
-            <Errormsg gotError={error} setError={setError} />
         </React.Fragment>
     );
 };
