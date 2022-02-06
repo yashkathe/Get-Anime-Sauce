@@ -9,14 +9,10 @@ import UploadForm from "../Components/Form/UploadForm";
 
 const MainForm = () => {
     // variants and hover
-
-    const hover = {
-        scale: 1.3,
-    };
-
+    
     return (
         <Card className={classes.Card}>
-            <div className={classes.iconContainer} whileHover={hover}>
+            <div className={classes.iconContainer}>
                 <motion.img src={uploadIcon} alt='upload' />
             </div>
             <div className={classes.info}>
