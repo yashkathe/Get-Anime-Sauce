@@ -6,17 +6,19 @@ const useHttp = () => {
     const [error, setError] = useState(null);
 
     const [getUrl, setGetUrl] = useState("");
+    const [getImage, setGetImage] = useState(null);
 
     const [receivedData, setReceivedData] = useState([]);
 
-    const sendRequest = useCallback(async (requestConfig) => {
+    const sendRequest = useCallback(async (requestConfig, isHookUrl = true) => {
         setError(null);
         setIsLoading(true);
         setDataFetched(false);
+
         try {
             const response = await fetch(requestConfig.url, {
                 method: requestConfig.method ? requestConfig.method : "GET",
-                headers: requestConfig.headers ? requestConfig.headers : {},
+                body: requestConfig.body ? requestConfig.body : null,
             });
 
             if (!response.ok) {
@@ -33,8 +35,11 @@ const useHttp = () => {
             setDataFetched(false);
             setError(err.message);
         }
-
-        setGetUrl("")
+        if (isHookUrl === true) {
+            setGetUrl("");
+        } else {
+            setGetImage(null);
+        }
     }, []);
 
     return {
@@ -45,6 +50,8 @@ const useHttp = () => {
         setError,
         getUrl,
         setGetUrl,
+        getImage,
+        setGetImage,
         receivedData,
         sendRequest,
     };
