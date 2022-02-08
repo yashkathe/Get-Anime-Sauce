@@ -12,7 +12,6 @@ import Errormsg from "../Errormsg";
 import useHttp from "../../Hooks/use-http";
 
 // variants
-
 const hover = {
     rotate: [0, -18, 18, -18, 18, 0],
 };
@@ -42,21 +41,8 @@ const submitBtnAnimate = {
 };
 
 const UploadForm = () => {
-    // state handling
-
     //state for assigning css classes
     const [isUrl, setIsUrl] = useState(true);
-
-    //state for getting image by upload and url from input
-    const [getImage, setGetImage] = useState(null);
-
-    const getPhotoHandler = (event) => {
-        setGetImage(event.target.files[0]);
-    };
-
-    const getUrlHandler = (event) => {
-        setGetUrl(event.target.value);
-    };
 
     const urlHandlerTrue = () => {
         setIsUrl(true);
@@ -66,6 +52,13 @@ const UploadForm = () => {
         setIsUrl(false);
     };
 
+    const getPhotoHandler = (event) => {
+        setGetImage(event.target.files[0]);
+    };
+
+    const getUrlHandler = (event) => {
+        setGetUrl(event.target.value);
+    };
 
     //calling the hook
     const {
@@ -76,20 +69,30 @@ const UploadForm = () => {
         getUrl,
         setGetUrl,
         setError,
+        getImage,
+        setGetImage,
         receivedData,
-        sendRequest: fetchUrlHandler,
+        sendRequest: fetchHandler,
     } = useHttp();
 
-    const clearData = () => {
-        setGetUrl("")
-    }
-
     const fetchUrl = async () => {
-        fetchUrlHandler({
+        fetchHandler({
             url: `https://api.trace.moe/search?anilistInfo&url=${encodeURIComponent(
                 `${getUrl}`
             )}`,
-            clearData,
+            isHookUrl: { isUrl },
+        });
+    };
+
+    const fetchImage = async () => {
+        const formData = new FormData();
+        formData.append("image", getImage);
+
+        fetchHandler({
+            url: "https://api.trace.moe/search?anilistInfo",
+            method: "POST",
+            body: formData,
+            isHookUrl: { isUrl },
         });
     };
 
@@ -154,23 +157,31 @@ const UploadForm = () => {
                 />
             </div>
             <div className={classes.submit}>
-                <motion.button
-                    type='submit'
-                    onClick={fetchUrl}
-                    variants={submitBtnAnimate}
-                    whileHover='hover'
-                >
-                    Submit
-                </motion.button>
+                {isUrl ? (
+                    <motion.button
+                        type='submit'
+                        onClick={fetchUrl}
+                        variants={submitBtnAnimate}
+                        whileHover='hover'
+                    >
+                        Submit
+                    </motion.button>
+                ) : (
+                    <motion.button
+                        type='submit'
+                        onClick={fetchImage}
+                        variants={submitBtnAnimate}
+                        whileHover='hover'
+                    >
+                        Submit
+                    </motion.button>
+                )}
             </div>
 
-            {/* spinner  and gotError msg*/}
+            {/* spinner, gotError msg, result*/}
 
             {isLoading === true && <Spinner />}
-
             <Errormsg gotError={error} setError={setError} />
-
-            {/* result */}
             <ReceivedResult
                 items={receivedData}
                 isLoading={isLoading}
