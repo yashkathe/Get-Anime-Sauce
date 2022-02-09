@@ -42,7 +42,7 @@
 }
 
 .iconContainer > img {
-    height: 4rem;
+    height: 4.5rem;
 }
 
 @media (max-width: 65rem) {
@@ -59,7 +59,7 @@
 
 .info {
     margin: 1rem;
-    font-size: 24px;
+    font-size: 26px;
     text-align: center;
 }
 

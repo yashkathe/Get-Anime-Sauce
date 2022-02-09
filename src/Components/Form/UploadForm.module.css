@@ -3,23 +3,24 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 1.5rem;
+    margin: 1.8rem;
 }
 
-@media (max-width:49rem){
-    .altButtons{
+@media (max-width: 49rem) {
+    .altButtons {
         margin: 1rem;
     }
 }
 
-@media (max-width:49rem){
-    .altButtons{
+@media (max-width: 49rem) {
+    .altButtons {
         margin: 0rem;
     }
 }
 
 .altButtons > div {
-    margin: 1rem 1.2rem;
+    margin: 0rem 1.2rem;
+    margin-top: 1rem;
     box-sizing: border-box;
     border-radius: 50%;
 }
@@ -68,19 +69,22 @@
     color: black;
 }
 
+.urlDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .urlInput {
     height: 3rem;
     box-sizing: border-box;
-    margin: 2rem 1rem  ;
+    margin: 1rem 1rem;
     border-radius: 45px;
-    width: 95%;
+    width: 100%;
     opacity: 1;
     text-align: center;
     transition: 1000ms;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
 }
 
 @media (max-width: 65rem) {
@@ -91,7 +95,7 @@
 
 @media (max-width: 28rem) {
     .urlInput {
-        margin-top:1rem;
+        margin-top: 1rem;
     }
 }
 
@@ -119,13 +123,13 @@
     border-radius: 44px;
 }
 
-@media(max-width: 65rem){
+@media (max-width: 65rem) {
     .submit > button {
         font-size: 24px;
     }
 }
 
-@media(max-width: 27rem){
+@media (max-width: 27rem) {
     .submit > button {
         font-size: 20px;
     }

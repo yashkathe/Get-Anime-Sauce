@@ -15,11 +15,9 @@ import useHttp from "../../Hooks/use-http";
 const hover = {
     rotate: [0, -18, 18, -18, 18, 0],
 };
-
 const tap = {
     scale: 1.5,
 };
-
 const urlFocus = {
     scale: 1.2,
     borderBottom: "3px solid black",
@@ -29,7 +27,6 @@ const urlFocus = {
         duration: 0.1,
     },
 };
-
 const submitBtnAnimate = {
     hover: {
         scale: 1.1,
@@ -47,7 +44,6 @@ const UploadForm = () => {
     const urlHandlerTrue = () => {
         setIsUrl(true);
     };
-
     const urlHandlerFalse = () => {
         setIsUrl(false);
     };
@@ -55,7 +51,6 @@ const UploadForm = () => {
     const getPhotoHandler = (event) => {
         setGetImage(event.target.files[0]);
     };
-
     const getUrlHandler = (event) => {
         setGetUrl(event.target.value);
     };
@@ -100,7 +95,6 @@ const UploadForm = () => {
         <React.Fragment>
             <div className={classes.altButtons}>
                 {/* add folder button  */}
-
                 <div>
                     <input
                         type='file'
@@ -125,7 +119,6 @@ const UploadForm = () => {
                 </div>
 
                 {/* url insert button  */}
-
                 <div>
                     <motion.button
                         onClick={urlHandlerTrue}
@@ -143,8 +136,7 @@ const UploadForm = () => {
                 </div>
             </div>
 
-            {/* rest of the form : input for url and submit button */}
-
+            {/* input for url */}
             <div className={classes.urlDiv}>
                 <motion.input
                     className={`${classes.urlInput} ${
@@ -156,26 +148,17 @@ const UploadForm = () => {
                     value={getUrl}
                 />
             </div>
+
+            {/* submit button */}
             <div className={classes.submit}>
-                {isUrl ? (
-                    <motion.button
-                        type='submit'
-                        onClick={fetchUrl}
-                        variants={submitBtnAnimate}
-                        whileHover='hover'
-                    >
-                        Submit
-                    </motion.button>
-                ) : (
-                    <motion.button
-                        type='submit'
-                        onClick={fetchImage}
-                        variants={submitBtnAnimate}
-                        whileHover='hover'
-                    >
-                        Submit
-                    </motion.button>
-                )}
+                <motion.button
+                    type='submit'
+                    onClick={isUrl ? fetchUrl : fetchImage}
+                    variants={submitBtnAnimate}
+                    whileHover='hover'
+                >
+                    Submit
+                </motion.button>
             </div>
 
             {/* spinner, gotError msg, result*/}
