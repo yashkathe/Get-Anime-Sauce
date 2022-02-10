@@ -3,7 +3,6 @@ import React from "react";
 import Card from "../UI/Card";
 import uploadIcon from "../assets/upload.png";
 
-import { motion } from "framer-motion";
 import classes from "./Parent.module.css";
 import UploadForm from "../Components/Form/UploadForm";
 
@@ -13,10 +12,10 @@ const MainForm = () => {
     return (
         <Card className={classes.Card}>
             <div className={classes.iconContainer}>
-                <motion.img src={uploadIcon} alt='upload' />
+                <img src={uploadIcon} alt='upload' />
             </div>
             <div className={classes.info}>
-                Upload an image or drop a url of an anime you want to search
+                Upload an image or drop a url of an anime you want to search !
             </div>
             <div>
                 <UploadForm />

@@ -33,6 +33,7 @@
     padding: 1rem;
     border-radius: 50%;
     cursor: pointer;
+    height: 3.8rem;
 }
 
 @media (max-width: 65rem) {
@@ -80,6 +81,7 @@
     height: 3rem;
     box-sizing: border-box;
     margin: 1rem 1rem;
+    padding: 0 2rem;
     border-radius: 45px;
     width: 100%;
     opacity: 1;

@@ -42,7 +42,7 @@
 }
 
 .iconContainer > img {
-    height: 4.5rem;
+    height: 4rem;
 }
 
 @media (max-width: 65rem) {
