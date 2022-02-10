@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import folderIcon from "../../assets/folder.png";
 import urlIcon from "../../assets/url.png";
@@ -10,34 +10,11 @@ import Spinner from "../../UI/Spinner";
 import classes from "./UploadForm.module.css";
 import Errormsg from "../Errormsg";
 import useHttp from "../../Hooks/use-http";
-
-// variants
-const hover = {
-    rotate: [0, -18, 18, -18, 18, 0],
-};
-const tap = {
-    scale: 1.5,
-};
-const urlFocus = {
-    scale: 1.2,
-    borderBottom: "3px solid black",
-    boxShadow: "0 4px 6px rgba(0,0,0,0.5)",
-    transition: {
-        type: "spring",
-        duration: 0.1,
-    },
-};
-const submitBtnAnimate = {
-    hover: {
-        scale: 1.1,
-        boxShadow: "1px 1px 10px rgba(0,0,0,0.5)",
-        transition: {
-            type: "tween",
-        },
-    },
-};
+import AuthContext from "../store/varients-store";
 
 const UploadForm = () => {
+    const ctx = useContext(AuthContext);
+
     //state for assigning css classes
     const [isUrl, setIsUrl] = useState(true);
 
@@ -93,85 +70,85 @@ const UploadForm = () => {
 
     return (
         <React.Fragment>
-            <div className={classes.altButtons}>
-                {/* add folder button  */}
-                <div>
-                    <input
-                        type='file'
-                        name='imageUpload'
-                        id='input'
-                        accept='image/*'
-                        className={classes.fileInput}
-                        onChange={getPhotoHandler}
-                        onClick={urlHandlerFalse}
-                    />
-                    <label htmlFor='input'>
-                        <motion.img
-                            className={`${classes.optButton} ${
-                                !isUrl && classes.optButtonActive
-                            }`}
-                            src={folderIcon}
-                            whileHover={hover}
-                            whileTap={tap}
-                            alt='folder Icon'
-                        ></motion.img>
-                    </label>
+                <div className={classes.altButtons}>
+                    {/* add folder button  */}
+                    <div>
+                        <input
+                            type='file'
+                            name='imageUpload'
+                            id='input'
+                            accept='image/*'
+                            className={classes.fileInput}
+                            onChange={getPhotoHandler}
+                            onClick={urlHandlerFalse}
+                        />
+                        <label htmlFor='input'>
+                            <motion.img
+                                className={`${classes.optButton} ${
+                                    !isUrl && classes.optButtonActive
+                                }`}
+                                src={folderIcon}
+                                whileHover={ctx.hoverBtn}
+                                whileTap={ctx.tap}
+                                alt='folder Icon'
+                            ></motion.img>
+                        </label>
+                    </div>
+
+                    {/* url insert button  */}
+                    <div>
+                        <motion.button
+                            onClick={urlHandlerTrue}
+                            whileHover={ctx.hoverBtn}
+                            whileTap={ctx.tap}
+                        >
+                            <img
+                                className={`${classes.optButton} ${
+                                    isUrl && classes.optButtonActive
+                                }`}
+                                src={urlIcon}
+                                alt='attachment chain Icon'
+                            ></img>
+                        </motion.button>
+                    </div>
                 </div>
 
-                {/* url insert button  */}
-                <div>
+                {/* input for url */}
+                <div className={classes.urlDiv}>
+                    <motion.input
+                        className={`${classes.urlInput} ${
+                            !isUrl && classes.cancel
+                        }`}
+                        placeholder='Image URL'
+                        whileFocus={ctx.urlFocus}
+                        onChange={getUrlHandler}
+                        value={getUrl}
+                    />
+                </div>
+
+                {/* submit button */}
+                <div className={classes.submit}>
                     <motion.button
-                        onClick={urlHandlerTrue}
-                        whileHover={hover}
-                        whileTap={tap}
+                        type='submit'
+                        onClick={isUrl ? fetchUrl : fetchImage}
+                        variants={ctx.submitBtnAnimate}
+                        whileHover='hover'
                     >
-                        <img
-                            className={`${classes.optButton} ${
-                                isUrl && classes.optButtonActive
-                            }`}
-                            src={urlIcon}
-                            alt='attachment chain Icon'
-                        ></img>
+                        Submit
                     </motion.button>
                 </div>
-            </div>
 
-            {/* input for url */}
-            <div className={classes.urlDiv}>
-                <motion.input
-                    className={`${classes.urlInput} ${
-                        !isUrl && classes.cancel
-                    }`}
-                    placeholder='Image URL'
-                    whileFocus={urlFocus}
-                    onChange={getUrlHandler}
-                    value={getUrl}
+                {/* spinner, gotError msg, result*/}
+
+                {isLoading === true && <Spinner />}
+                <Errormsg gotError={error} setError={setError} />
+                <ReceivedResult
+                    items={receivedData}
+                    isLoading={isLoading}
+                    dataFetched={dataFetched}
+                    error={error}
+                    setDataFetched={setDataFetched}
                 />
-            </div>
-
-            {/* submit button */}
-            <div className={classes.submit}>
-                <motion.button
-                    type='submit'
-                    onClick={isUrl ? fetchUrl : fetchImage}
-                    variants={submitBtnAnimate}
-                    whileHover='hover'
-                >
-                    Submit
-                </motion.button>
-            </div>
-
-            {/* spinner, gotError msg, result*/}
-
-            {isLoading === true && <Spinner />}
-            <Errormsg gotError={error} setError={setError} />
-            <ReceivedResult
-                items={receivedData}
-                isLoading={isLoading}
-                dataFetched={dataFetched}
-                error={error}
-                setDataFetched={setDataFetched}
-            />
         </React.Fragment>
     );
 };
