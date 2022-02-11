@@ -71,6 +71,7 @@
 }
 
 .urlDiv {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,6 +107,20 @@
     opacity: 0;
     margin: 0;
     height: 0;
+}
+
+.urlInput:focus + .inputClearBtn{
+    right: -2%;
+    opacity: 1;
+}
+
+
+.inputClearBtn{
+    opacity: 0;
+    position: absolute;
+    right: 5%;
+    top: 30%;
+    transition: 1200ms;
 }
 
 .submit {

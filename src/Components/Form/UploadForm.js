@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 
 import folderIcon from "../../assets/folder.png";
 import urlIcon from "../../assets/url.png";
+import clearIcon from "../../assets/clear.png"
 import { motion } from "framer-motion";
 
 import ReceivedResult from "../Result/ReceivedResult";
@@ -31,6 +32,9 @@ const UploadForm = () => {
     const getUrlHandler = (event) => {
         setGetUrl(event.target.value);
     };
+    const clearInputHandlerBtn = () => {
+        setGetUrl("")
+    }
 
     //calling the hook
     const {
@@ -124,6 +128,9 @@ const UploadForm = () => {
                         onChange={getUrlHandler}
                         value={getUrl}
                     />
+                    <button className={classes.inputClearBtn} onClick={clearInputHandlerBtn}>
+                        <img src={clearIcon} alt="clear"></img>
+                    </button>
                 </div>
 
                 {/* submit button */}

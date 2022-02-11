@@ -8,7 +8,7 @@ const AuthContext = React.createContext({
     tap: { scale: 1.5 },
 
     urlFocus: {
-        scale: 1.2,
+        scale: 1.1,
         borderBottom: "3px solid black",
         boxShadow: "0 4px 6px rgba(0,0,0,0.5)",
         transition: {
