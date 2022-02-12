@@ -1,6 +1,8 @@
 import React from "react";
 
-const AuthContext = React.createContext({
+const VarientsContext = React.createContext({
+    //uploadForm.js varients
+
     hoverBtn: {
         rotate: [0, -18, 18, -18, 18, 0],
     },
@@ -27,6 +29,8 @@ const AuthContext = React.createContext({
         },
     },
 
+    //receivedResult.js varients
+
     backdropAnimation: {
         hidden: {
             opacity: 0,
@@ -37,7 +41,7 @@ const AuthContext = React.createContext({
             transition: { duration: 1 },
         },
     },
-    
+
     resultModal: {
         hidden: {
             y: "50vh",
@@ -51,6 +55,30 @@ const AuthContext = React.createContext({
             transition: { duration: 1 },
         },
     },
+
+    //Errormsg.js varients
+
+    backdropAnimationError: {
+        hidden: {
+            opacity: 0,
+        },
+        visible: {
+            opacity: 1,
+            transition: { duration: 0.8 },
+        },
+    },
+
+    errorModal: {
+        hidden: {
+            y: "-100vh",
+            opacity: 0,
+        },
+        visible: {
+            y: "-50vh",
+            opacity: 1,
+            transition: { type: "spring" },
+        },
+    },
 });
 
-export default AuthContext;
+export default VarientsContext;

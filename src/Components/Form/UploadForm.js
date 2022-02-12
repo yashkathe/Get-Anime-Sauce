@@ -11,10 +11,10 @@ import Spinner from "../../UI/Spinner";
 import classes from "./UploadForm.module.css";
 import Errormsg from "../Errormsg";
 import useHttp from "../../Hooks/use-http";
-import AuthContext from "../store/varients-store";
+import VarientsContext from "../store/varients-store";
 
 const UploadForm = () => {
-    const ctx = useContext(AuthContext);
+    const ctx = useContext(VarientsContext);
 
     //state for assigning css classes
     const [isUrl, setIsUrl] = useState(true);

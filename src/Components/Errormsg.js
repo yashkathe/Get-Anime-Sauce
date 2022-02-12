@@ -1,34 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import classes from "./Errormsg.module.css";
 import { motion, AnimatePresence } from "framer-motion";
+import VarientsContext from "./store/varients-store";
 
 const Errormsg = ({ gotError, setError }) => {
-    //variants
-
-    //backdrop variant
-    const backdropAnimation = {
-        hidden: {
-            opacity: 0,
-        },
-        visible: {
-            opacity: 1,
-            transition: { duration: 0.8 },
-        },
-    };
-
-    //modal variant
-    const errorModal = {
-        hidden: {
-            y: "-100vh",
-            opacity: 0,
-        },
-        visible: {
-            y: "-50vh",
-            opacity: 1,
-            transition: { type: "spring" },
-        },
-    };
+    const ctx = useContext(VarientsContext)
 
     const popupCloseHandler = () => {
         setError(null);
@@ -43,7 +20,7 @@ const Errormsg = ({ gotError, setError }) => {
                         <motion.div
                             onClick={popupCloseHandler}
                             className={classes.backdrop}
-                            variants={backdropAnimation}
+                            variants={ctx.backdropAnimationError}
                             initial='hidden'
                             animate='visible'
                             exit='hidden'
@@ -53,7 +30,7 @@ const Errormsg = ({ gotError, setError }) => {
 
                         <motion.div
                             className={classes.error}
-                            variants={errorModal}
+                            variants={ctx.errorModal}
                             initial='hidden'
                             animate='visible'
                             exit='hidden'
