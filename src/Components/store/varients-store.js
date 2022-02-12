@@ -26,6 +26,31 @@ const AuthContext = React.createContext({
             },
         },
     },
+
+    backdropAnimation: {
+        hidden: {
+            opacity: 0,
+            transition: { duration: 1 },
+        },
+        visible: {
+            opacity: 1,
+            transition: { duration: 1 },
+        },
+    },
+    
+    resultModal: {
+        hidden: {
+            y: "50vh",
+        },
+        visible: {
+            y: "0vh",
+            transition: { type: "tween", duration: 1 },
+        },
+        exit: {
+            y: "50vh",
+            transition: { duration: 1 },
+        },
+    },
 });
 
 export default AuthContext;

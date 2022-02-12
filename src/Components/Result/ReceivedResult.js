@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import classes from "./ReceivedResult.module.css";
 
 import { motion, AnimatePresence } from "framer-motion";
+import AuthContext from "../store/varients-store";
 
 const ReceivedResult = ({
     items,
@@ -10,31 +11,7 @@ const ReceivedResult = ({
     error,
     setDataFetched,
 }) => {
-    //variants
-    const backdropAnimation = {
-        hidden: {
-            opacity: 0,
-            transition: { duration: 1 },
-        },
-        visible: {
-            opacity: 1,
-            transition: { duration: 1 },
-        },
-    };
-
-    const resultModal = {
-        hidden: {
-            y: "50vh",
-        },
-        visible: {
-            y: "0vh",
-            transition: { type: "tween", duration: 1 },
-        },
-        exit: {
-            y: "50vh",
-            transition: { duration: 1 },
-        },
-    };
+    const ctx = useContext(AuthContext)
 
     const receivedData = items;
 
@@ -50,7 +27,7 @@ const ReceivedResult = ({
                         <motion.div
                             className={classes.backdrop}
                             onClick={popupHandler}
-                            variants={backdropAnimation}
+                            variants={ctx.backdropAnimation}
                             initial='hidden'
                             animate='visible'
                             exit='hidden'
@@ -60,7 +37,7 @@ const ReceivedResult = ({
 
                         <motion.div
                             className={classes.result}
-                            variants={resultModal}
+                            variants={ctx.resultModal}
                             initial='hidden'
                             animate='visible'
                             exit='exit'
