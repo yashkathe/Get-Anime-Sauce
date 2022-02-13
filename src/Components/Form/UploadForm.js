@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useMemo } from "react";
 
 import folderIcon from "../../assets/folder.png";
 import urlIcon from "../../assets/url.png";
-import clearIcon from "../../assets/clear.png"
+import clearIcon from "../../assets/clear.png";
 import { motion } from "framer-motion";
 
 import ReceivedResult from "../Result/ReceivedResult";
@@ -11,7 +11,7 @@ import Spinner from "../../UI/Spinner";
 import classes from "./UploadForm.module.css";
 import Errormsg from "../Errormsg";
 import useHttp from "../../Hooks/use-http";
-import VarientsContext from "../store/varients-store";
+import VarientsContext from "../../store/varients-store";
 
 const UploadForm = () => {
     const ctx = useContext(VarientsContext);
@@ -33,8 +33,8 @@ const UploadForm = () => {
         setGetUrl(event.target.value);
     };
     const clearInputHandlerBtn = () => {
-        setGetUrl("")
-    }
+        setGetUrl("");
+    };
 
     //calling the hook
     const {
@@ -72,90 +72,103 @@ const UploadForm = () => {
         });
     };
 
+    // const [isDisabled, setIsDisabled] = useState(true);
+
+    // if (getImage || getUrl) {
+    //     setIsDisabled(false);
+    // } else {
+    //     setIsDisabled(true);
+    // }
+
     return (
         <React.Fragment>
-                <div className={classes.altButtons}>
-                    {/* add folder button  */}
-                    <div>
-                        <input
-                            type='file'
-                            name='imageUpload'
-                            id='input'
-                            accept='image/*'
-                            className={classes.fileInput}
-                            onChange={getPhotoHandler}
-                            onClick={urlHandlerFalse}
-                        />
-                        <label htmlFor='input'>
-                            <motion.img
-                                className={`${classes.optButton} ${
-                                    !isUrl && classes.optButtonActive
-                                }`}
-                                src={folderIcon}
-                                whileHover={ctx.hoverBtn}
-                                whileTap={ctx.tap}
-                                alt='folder Icon'
-                            ></motion.img>
-                        </label>
-                    </div>
-
-                    {/* url insert button  */}
-                    <div>
-                        <motion.button
-                            onClick={urlHandlerTrue}
+            <div className={classes.altButtons}>
+                {/* add folder button  */}
+                <div>
+                    <input
+                        type='file'
+                        name='imageUpload'
+                        id='input'
+                        accept='image/*'
+                        className={classes.fileInput}
+                        onChange={getPhotoHandler}
+                        onClick={urlHandlerFalse}
+                    />
+                    <label htmlFor='input'>
+                        <motion.img
+                            className={`${classes.optButton} ${
+                                !isUrl && classes.optButtonActive
+                            }`}
+                            src={folderIcon}
                             whileHover={ctx.hoverBtn}
                             whileTap={ctx.tap}
-                        >
-                            <img
-                                className={`${classes.optButton} ${
-                                    isUrl && classes.optButtonActive
-                                }`}
-                                src={urlIcon}
-                                alt='attachment chain Icon'
-                            ></img>
-                        </motion.button>
-                    </div>
+                            alt='folder Icon'
+                        ></motion.img>
+                    </label>
                 </div>
 
-                {/* input for url */}
-                <div className={classes.urlDiv}>
-                    <motion.input
-                        className={`${classes.urlInput} ${
-                            !isUrl && classes.cancel
-                        }`}
-                        placeholder='Image URL'
-                        whileFocus={ctx.urlFocus}
-                        onChange={getUrlHandler}
-                        value={getUrl}
-                    />
-                    <button className={classes.inputClearBtn} onClick={clearInputHandlerBtn}>
-                        <img src={clearIcon} alt="clear"></img>
-                    </button>
-                </div>
-
-                {/* submit button */}
-                <div className={classes.submit}>
+                {/* url insert button  */}
+                <div>
                     <motion.button
-                        type='submit'
-                        onClick={isUrl ? fetchUrl : fetchImage}
-                        variants={ctx.submitBtnAnimate}
-                        whileHover='hover'
+                        onClick={urlHandlerTrue}
+                        whileHover={ctx.hoverBtn}
+                        whileTap={ctx.tap}
                     >
-                        Submit
+                        <img
+                            className={`${classes.optButton} ${
+                                isUrl && classes.optButtonActive
+                            }`}
+                            src={urlIcon}
+                            alt='attachment chain Icon'
+                        ></img>
                     </motion.button>
                 </div>
+            </div>
 
-                {/* spinner, gotError msg, result*/}
-
-                {isLoading === true && <Spinner />}
-                <Errormsg gotError={error} setError={setError} />
-                <ReceivedResult
-                    items={receivedData}
-                    isLoading={isLoading}
-                    dataFetched={dataFetched}
-                    error={error}
-                    setDataFetched={setDataFetched}
+            {/* input for url */}
+            <div className={classes.urlDiv}>
+                <motion.input
+                    className={`${classes.urlInput} ${
+                        !isUrl && classes.cancel
+                    }`}
+                    placeholder='Image URL'
+                    whileFocus={ctx.urlFocus}
+                    onChange={getUrlHandler}
+                    value={getUrl}
                 />
+                <button
+                    className={classes.inputClearBtn}
+                    onClick={clearInputHandlerBtn}
+                >
+                    <img src={clearIcon} alt='clear'></img>
+                </button>
+            </div>
+
+            {/* submit button */}
+            <div className={classes.submit}>
+                <motion.button
+                    type='submit'
+                    onClick={isUrl ? fetchUrl : fetchImage}
+                    variants={ctx.submitBtnAnimate}
+                    whileHover='hover'
+                >
+                    Submit
+                </motion.button>
+            </div>
+
+            {/* spinner, gotError msg, result*/}
+
+            {isLoading === true && <Spinner />}
+            <Errormsg gotError={error} setError={setError} />
+            <ReceivedResult
+                items={useMemo(() => {
+                    return receivedData;
+                }, [receivedData])}
+                isLoading={isLoading}
+                dataFetched={dataFetched}
+                error={error}
+                setDataFetched={setDataFetched}
+            />
         </React.Fragment>
     );
 };

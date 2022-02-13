@@ -1,3 +1,4 @@
+import React from 'react';
 import classes from "./Spinner.module.css";
 
 const Spinner = () => {
@@ -8,4 +9,4 @@ const Spinner = () => {
     );
 };
 
-export default Spinner;
+export default React.memo(Spinner);

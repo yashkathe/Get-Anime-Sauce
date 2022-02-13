@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 
 import classes from "./Errormsg.module.css";
 import { motion, AnimatePresence } from "framer-motion";
-import VarientsContext from "./store/varients-store";
+import VarientsContext from "../store/varients-store";
 
 const Errormsg = ({ gotError, setError }) => {
     const ctx = useContext(VarientsContext)
@@ -46,4 +46,4 @@ const Errormsg = ({ gotError, setError }) => {
     );
 }
 
-export default Errormsg;
+export default React.memo(Errormsg);

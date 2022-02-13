@@ -140,6 +140,10 @@
     border-radius: 44px;
 }
 
+.submit > button:disabled {
+    cursor: not-allowed;
+}
+
 @media (max-width: 65rem) {
     .submit > button {
         font-size: 24px;

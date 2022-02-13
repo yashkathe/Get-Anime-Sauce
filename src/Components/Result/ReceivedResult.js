@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import classes from "./ReceivedResult.module.css";
 
 import { motion, AnimatePresence } from "framer-motion";
-import VarientsContext from "../store/varients-store";
+import VarientsContext from "../../store/varients-store";
 
 const ReceivedResult = ({
     items,
@@ -94,4 +94,4 @@ const ReceivedResult = ({
     );
 };
 
-export default ReceivedResult;
+export default React.memo(ReceivedResult);
