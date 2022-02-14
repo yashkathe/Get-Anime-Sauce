@@ -20,6 +20,9 @@ const MainForm = () => {
             <div>
                 <UploadForm />
             </div>
+            <div className={classes.credits}>
+                Powered by Trace moe
+            </div>
         </Card>
     );
 };
