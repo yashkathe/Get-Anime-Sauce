@@ -10,14 +10,15 @@ const ReceivedResult = ({
     dataFetched,
     error,
     setDataFetched,
+    setGetImage
 }) => {
     const ctx = useContext(VarientsContext)
 
     const receivedData = items;
-    console.log(receivedData)
 
     const popupHandler = () => {
         setDataFetched(false);
+        setGetImage(null)
     };
 
     return (

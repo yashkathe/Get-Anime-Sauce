@@ -1,4 +1,4 @@
-import React, { useState, useContext, useMemo } from "react";
+import React, { useState, useContext, useMemo, useEffect } from "react";
 
 import folderIcon from "../../assets/folder.png";
 import urlIcon from "../../assets/url.png";
@@ -72,13 +72,23 @@ const UploadForm = () => {
         });
     };
 
-    // const [isDisabled, setIsDisabled] = useState(true);
+    const [isDisabled, setIsDisabled] = useState(true);
 
-    // if (getImage || getUrl) {
-    //     setIsDisabled(false);
-    // } else {
-    //     setIsDisabled(true);
-    // }
+    useEffect(() => {
+        if (isUrl === true) {
+            if (getUrl) {
+                setIsDisabled(false);
+            } else {
+                setIsDisabled(true);
+            }
+        } else if (isUrl === false) {
+            if (getImage) {
+                setIsDisabled(false);
+            } else {
+                setIsDisabled(true);
+            }
+        }
+    }, [isUrl, getUrl, getImage]);
 
     return (
         <React.Fragment>
@@ -147,9 +157,10 @@ const UploadForm = () => {
             {/* submit button */}
             <div className={classes.submit}>
                 <motion.button
+                    disabled={isDisabled}
                     type='submit'
                     onClick={isUrl ? fetchUrl : fetchImage}
-                    variants={ctx.submitBtnAnimate}
+                    variants={!isDisabled ? ctx.submitBtnAnimate: null}
                     whileHover='hover'
                 >
                     Submit
@@ -168,6 +179,7 @@ const UploadForm = () => {
                 dataFetched={dataFetched}
                 error={error}
                 setDataFetched={setDataFetched}
+                setGetImage={setGetImage}
             />
         </React.Fragment>
     );

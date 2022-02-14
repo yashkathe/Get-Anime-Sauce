@@ -109,13 +109,12 @@
     height: 0;
 }
 
-.urlInput:focus + .inputClearBtn{
+.urlInput:focus + .inputClearBtn {
     right: -2%;
     opacity: 1;
 }
 
-
-.inputClearBtn{
+.inputClearBtn {
     opacity: 0;
     position: absolute;
     right: 5%;
@@ -142,6 +141,7 @@
 
 .submit > button:disabled {
     cursor: not-allowed;
+    background-color: rgb(43, 177, 197);
 }
 
 @media (max-width: 65rem) {
