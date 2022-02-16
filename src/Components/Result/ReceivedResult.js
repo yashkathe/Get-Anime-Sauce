@@ -1,8 +1,10 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import classes from "./ReceivedResult.module.css";
 
 import { motion, AnimatePresence } from "framer-motion";
 import VarientsContext from "../../store/varients-store";
+
+import ResultCard from "./ResultCard";
 
 const ReceivedResult = ({
     items,
@@ -10,15 +12,15 @@ const ReceivedResult = ({
     dataFetched,
     error,
     setDataFetched,
-    setGetImage
+    setGetImage,
 }) => {
-    const ctx = useContext(VarientsContext)
+    const ctx = useContext(VarientsContext);
 
     const receivedData = items;
 
     const popupHandler = () => {
         setDataFetched(false);
-        setGetImage(null)
+        setGetImage(null);
     };
 
     return (
@@ -44,49 +46,17 @@ const ReceivedResult = ({
                             animate='visible'
                             exit='exit'
                         >
-                            {/* title */}
-                            {receivedData.result[0].anilist.title.english ===
-                            null ? (
-                                <h1>
-                                    {
-                                        receivedData.result[0].anilist.title
-                                            .romaji
-                                    }
-                                </h1>
-                            ) : (
-                                <h1>
-                                    {
-                                        receivedData.result[0].anilist.title
-                                            .english
-                                    }
-                                </h1>
-                            )}
-
-                            {/* episode  */}
-
-                            {receivedData.result[0].episode === null ? (
-                                <h3>Couldn't identify the episode</h3>
-                            ) : (
-                                <h2>
-                                    Episode: {receivedData.result[0].episode}
-                                </h2>
-                            )}
-
-                            {/* video */}
-
-                            <video
-                                src={receivedData.result[0].video}
-                                autoPlay={true}
-                                loop={true}
-                                muted={true}
-                                playsInline={true}
-                            ></video>
-
-                            {/* similarity */}
-
-                            <h4>
-                                Similarity : {receivedData.result[0].similarity}
-                            </h4>
+                            <ResultCard
+                                englishTitle={
+                                    receivedData.result[0].anilist.title.english
+                                }
+                                altTitle={
+                                    receivedData.result[0].anilist.title.romaji
+                                }
+                                episode={receivedData.result[0].episode}
+                                videoLink={receivedData.result[0].video}
+                                similarity={receivedData.result[0].similarity}
+                            />
                         </motion.div>
                     </React.Fragment>
                 )}
