@@ -3,7 +3,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 1.8rem;
+    margin: 1rem;
 }
 
 @media (max-width: 49rem) {

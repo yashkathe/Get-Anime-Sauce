@@ -12,6 +12,7 @@ import classes from "./UploadForm.module.css";
 import Errormsg from "../Errormsg";
 import useHttp from "../../Hooks/use-http";
 import VarientsContext from "../../store/varients-store";
+import ImageResponse from "./ImageResponse";
 
 const UploadForm = () => {
     const ctx = useContext(VarientsContext);
@@ -135,6 +136,9 @@ const UploadForm = () => {
                 </div>
             </div>
 
+            {/* <ImageResponse src={isUrl ? getUrl : getImage}/> */}
+            <ImageResponse getImage={getImage} getUrl={getUrl} isUrl={isUrl} />
+
             {/* input for url */}
             <div className={classes.urlDiv}>
                 <motion.input
@@ -160,7 +164,7 @@ const UploadForm = () => {
                     disabled={isDisabled}
                     type='submit'
                     onClick={isUrl ? fetchUrl : fetchImage}
-                    variants={!isDisabled ? ctx.submitBtnAnimate: null}
+                    variants={!isDisabled ? ctx.submitBtnAnimate : null}
                     whileHover='hover'
                 >
                     Submit
@@ -170,7 +174,7 @@ const UploadForm = () => {
             {/* spinner, gotError msg, result*/}
 
             {isLoading === true && <Spinner />}
-            <Errormsg gotError={error} setError={setError} />
+            <Errormsg gotError={error} setError={setError} isUrl={isUrl} />
             <ReceivedResult
                 items={useMemo(() => {
                     return receivedData;

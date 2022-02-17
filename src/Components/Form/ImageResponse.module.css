@@ -1,0 +1,13 @@
+.main__div img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.main__div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    padding: 1rem;
+    height: 10rem;
+}
