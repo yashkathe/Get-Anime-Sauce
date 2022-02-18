@@ -79,6 +79,19 @@ const VarientsContext = React.createContext({
             transition: { type: "spring" },
         },
     },
+
+    //varients for response image 
+    resimg : {
+        hidden: {
+            y: "-15%",
+            opacity: 0,
+        },
+        visible: {
+            y: "0",
+            opacity: 1,
+            transition: { type: "tween", duration: 0.4 },
+        },
+    }
 });
 
 export default VarientsContext;
