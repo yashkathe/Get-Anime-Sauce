@@ -23,12 +23,14 @@ const UploadForm = () => {
     const urlHandlerTrue = () => {
         setIsUrl(true);
     };
-    const urlHandlerFalse = () => {
+    const urlHandlerFalse = (event) => {
         setIsUrl(false);
+        event.target.value = null
     };
 
     const getPhotoHandler = (event) => {
         setGetImage(event.target.files[0]);
+        console.log('this is running')
     };
     const getUrlHandler = (event) => {
         setGetUrl(event.target.value);
@@ -136,7 +138,6 @@ const UploadForm = () => {
                 </div>
             </div>
 
-            {/* <ImageResponse src={isUrl ? getUrl : getImage}/> */}
             <ImageResponse getImage={getImage} getUrl={getUrl} isUrl={isUrl} setGetImage={setGetImage} setGetUrl={setGetUrl} />
 
             {/* input for url */}

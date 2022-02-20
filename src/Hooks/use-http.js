@@ -6,7 +6,7 @@ const useHttp = () => {
     const [error, setError] = useState(null);
 
     const [getUrl, setGetUrl] = useState("");
-    const [getImage, setGetImage] = useState(null);
+    const [getImage, setGetImage] = useState("");
 
     const [receivedData, setReceivedData] = useState([]);
 
@@ -38,7 +38,8 @@ const useHttp = () => {
         if (isHookUrl === true) {
             setGetUrl("");
         } else {
-            setGetImage(null);
+            setGetImage("");
+
         }
     }, []);
 

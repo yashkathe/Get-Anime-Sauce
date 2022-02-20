@@ -13,7 +13,7 @@ const ImageResponse = ({ getImage, setGetImage, getUrl, setGetUrl, isUrl }) => {
 
     useEffect(() => {
         if (isUrl === true) {
-            setGetImage(null);
+            setGetImage("");
         } else if (isUrl === false) {
             setGetUrl("");
         }
@@ -82,4 +82,4 @@ const ImageResponse = ({ getImage, setGetImage, getUrl, setGetUrl, isUrl }) => {
     );
 };
 
-export default ImageResponse;
+export default React.memo(ImageResponse);

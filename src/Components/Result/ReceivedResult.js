@@ -20,7 +20,7 @@ const ReceivedResult = ({
 
     const popupHandler = () => {
         setDataFetched(false);
-        setGetImage(null);
+        setGetImage("");
     };
 
     return (
