@@ -80,18 +80,20 @@ const VarientsContext = React.createContext({
         },
     },
 
-    //varients for response image 
-    resimg : {
+    //varients for response image
+    resimg: {
         hidden: {
             y: "-15%",
             opacity: 0,
+            transition: { type: "tween", duration: 0.4, delay: 0.3 },
         },
         visible: {
             y: "0",
             opacity: 1,
-            transition: { type: "tween", duration: 0.4 },
+            transition: { type: "tween", duration: 0.4, delay: 0.3 },
         },
-    }
+    },
+
 });
 
 export default VarientsContext;

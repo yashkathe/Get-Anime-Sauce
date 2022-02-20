@@ -89,7 +89,7 @@ const UploadForm = () => {
                 setIsDisabled(true);
             }
         }
-    }, [isUrl, getUrl, getImage]);
+    }, [isUrl, getUrl, getImage,setGetUrl,setGetImage]);
 
     return (
         <React.Fragment>
@@ -137,7 +137,7 @@ const UploadForm = () => {
             </div>
 
             {/* <ImageResponse src={isUrl ? getUrl : getImage}/> */}
-            <ImageResponse getImage={getImage} getUrl={getUrl} isUrl={isUrl} />
+            <ImageResponse getImage={getImage} getUrl={getUrl} isUrl={isUrl} setGetImage={setGetImage} setGetUrl={setGetUrl} />
 
             {/* input for url */}
             <div className={classes.urlDiv}>
