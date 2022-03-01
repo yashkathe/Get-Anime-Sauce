@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 
 import ReceivedResult from "../Result/ReceivedResult";
 import Spinner from "../../UI/Spinner";
+import MetaTag from "../../UI/MetaTag";
 
 import classes from "./UploadForm.module.css";
 import Errormsg from "../Errormsg";
@@ -18,19 +19,19 @@ const UploadForm = () => {
     const ctx = useContext(VarientsContext);
 
     //state for assigning css classes
-    const [isUrl, setIsUrl] = useState(true);
+    const [ isUrl, setIsUrl ] = useState(true);
 
     const urlHandlerTrue = () => {
         setIsUrl(true);
     };
     const urlHandlerFalse = (event) => {
         setIsUrl(false);
-        event.target.value = null
+        event.target.value = null;
     };
 
     const getPhotoHandler = (event) => {
-        setGetImage(event.target.files[0]);
-        console.log('this is running')
+        setGetImage(event.target.files[ 0 ]);
+        console.log('this is running');
     };
     const getUrlHandler = (event) => {
         setGetUrl(event.target.value);
@@ -75,116 +76,114 @@ const UploadForm = () => {
         });
     };
 
-    const [isDisabled, setIsDisabled] = useState(true);
+    const [ isDisabled, setIsDisabled ] = useState(true);
 
     useEffect(() => {
-        if (isUrl === true) {
-            if (getUrl) {
+        if(isUrl === true) {
+            if(getUrl) {
                 setIsDisabled(false);
             } else {
                 setIsDisabled(true);
             }
-        } else if (isUrl === false) {
-            if (getImage) {
+        } else if(isUrl === false) {
+            if(getImage) {
                 setIsDisabled(false);
             } else {
                 setIsDisabled(true);
             }
         }
-    }, [isUrl, getUrl, getImage,setGetUrl,setGetImage]);
+    }, [ isUrl, getUrl, getImage, setGetUrl, setGetImage ]);
 
     return (
         <React.Fragment>
-            <div className={classes.altButtons}>
-                {/* add folder button  */}
+            <MetaTag/>
+            <div className={ classes.altButtons }>
+                {/* add folder button  */ }
                 <div>
                     <input
                         type='file'
                         name='imageUpload'
                         id='input'
                         accept='image/*'
-                        className={classes.fileInput}
-                        onChange={getPhotoHandler}
-                        onClick={urlHandlerFalse}
+                        className={ classes.fileInput }
+                        onChange={ getPhotoHandler }
+                        onClick={ urlHandlerFalse }
                     />
                     <label htmlFor='input'>
                         <motion.img
-                            className={`${classes.optButton} ${
-                                !isUrl && classes.optButtonActive
-                            }`}
-                            src={folderIcon}
-                            whileHover={ctx.hoverBtn}
-                            whileTap={ctx.tap}
+                            className={ `${classes.optButton} ${!isUrl && classes.optButtonActive
+                                }` }
+                            src={ folderIcon }
+                            whileHover={ ctx.hoverBtn }
+                            whileTap={ ctx.tap }
                             alt='folder Icon'
                         ></motion.img>
                     </label>
                 </div>
 
-                {/* url insert button  */}
+                {/* url insert button  */ }
                 <div>
                     <motion.button
-                        onClick={urlHandlerTrue}
-                        whileHover={ctx.hoverBtn}
-                        whileTap={ctx.tap}
+                        onClick={ urlHandlerTrue }
+                        whileHover={ ctx.hoverBtn }
+                        whileTap={ ctx.tap }
                     >
                         <img
-                            className={`${classes.optButton} ${
-                                isUrl && classes.optButtonActive
-                            }`}
-                            src={urlIcon}
+                            className={ `${classes.optButton} ${isUrl && classes.optButtonActive
+                                }` }
+                            src={ urlIcon }
                             alt='attachment chain Icon'
                         ></img>
                     </motion.button>
                 </div>
             </div>
 
-            <ImageResponse getImage={getImage} getUrl={getUrl} isUrl={isUrl} setGetImage={setGetImage} setGetUrl={setGetUrl} />
+            <ImageResponse getImage={ getImage } getUrl={ getUrl } isUrl={ isUrl } setGetImage={ setGetImage } setGetUrl={ setGetUrl } />
 
-            {/* input for url */}
-            <div className={classes.urlDiv}>
+            {/* input for url */ }
+            <div className={ classes.urlDiv }>
                 <motion.input
-                    className={`${classes.urlInput} ${
-                        !isUrl && classes.cancel
-                    }`}
+                    className={ `${classes.urlInput} ${!isUrl && classes.cancel
+                        }` }
                     placeholder='Image URL'
-                    whileFocus={ctx.urlFocus}
-                    onChange={getUrlHandler}
-                    value={getUrl}
+                    whileFocus={ ctx.urlFocus }
+                    onChange={ getUrlHandler }
+                    value={ getUrl }
                 />
                 <button
-                    className={classes.inputClearBtn}
-                    onClick={clearInputHandlerBtn}
+                    className={ classes.inputClearBtn }
+                    onClick={ clearInputHandlerBtn }
                 >
-                    <img src={clearIcon} alt='clear'></img>
+                    <img src={ clearIcon } alt='clear'></img>
                 </button>
             </div>
 
-            {/* submit button */}
-            <div className={classes.submit}>
+            {/* submit button */ }
+            <div className={ classes.submit }>
                 <motion.button
-                    disabled={isDisabled}
+                    disabled={ isDisabled }
                     type='submit'
-                    onClick={isUrl ? fetchUrl : fetchImage}
-                    variants={!isDisabled ? ctx.submitBtnAnimate : null}
+                    onClick={ isUrl ? fetchUrl : fetchImage }
+                    variants={ !isDisabled ? ctx.submitBtnAnimate : null }
                     whileHover='hover'
                 >
                     Submit
                 </motion.button>
             </div>
 
-            {/* spinner, gotError msg, result*/}
+            {/* spinner, gotError msg, result*/ }
 
-            {isLoading === true && <Spinner />}
-            <Errormsg gotError={error} setError={setError} isUrl={isUrl} />
+            { isLoading === true && <Spinner /> }
+            <Errormsg gotError={ error } setError={ setError } isUrl={ isUrl } />
             <ReceivedResult
-                items={useMemo(() => {
+                items={ useMemo(() => {
                     return receivedData;
-                }, [receivedData])}
-                isLoading={isLoading}
-                dataFetched={dataFetched}
-                error={error}
-                setDataFetched={setDataFetched}
-                setGetImage={setGetImage}
+                }, [ receivedData ]) }
+                isLoading={ isLoading }
+                dataFetched={ dataFetched }
+                error={ error }
+                setDataFetched={ setDataFetched }
+                setGetImage={ setGetImage }
             />
         </React.Fragment>
     );
