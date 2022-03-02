@@ -1,10 +1,10 @@
-import "./App.css";
+import classes from "./App.module.css";
 import Parent from "./Components/Parent";
 import Header from "./UI/Header";
 
 const App = () => {
     return (
-        <div className='App'>
+        <div className={classes.parent}>
             <Header />
             <Parent />
         </div>
