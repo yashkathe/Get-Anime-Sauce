@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 
 import classes from "./ImageResponse.module.css";
 import { motion, AnimatePresence } from "framer-motion";
-import VarientsContext from "../../store/varients-store";
+import VarientsContext from "../../Store/varients-store";
 
 import uploadIcon from "../../assets/upload.png";
 

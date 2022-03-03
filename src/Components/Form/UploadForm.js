@@ -12,7 +12,7 @@ import MetaTag from "../../UI/MetaTag";
 import classes from "./UploadForm.module.css";
 import Errormsg from "../Errormsg";
 import useHttp from "../../Hooks/use-http";
-import VarientsContext from "../../store/varients-store";
+import VarientsContext from "../../Store/varients-store";
 import ImageResponse from "./ImageResponse";
 
 const UploadForm = () => {
